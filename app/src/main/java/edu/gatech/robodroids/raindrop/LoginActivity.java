@@ -20,6 +20,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -29,6 +30,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,6 +46,12 @@ public class LoginActivity extends AppCompatActivity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        final Button loginButton = (Button) findViewById(R.id.email_sign_in_button);
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                checkLogin(v);
+            }
+        });
         final Button cancelButton = (Button) findViewById(R.id.cancel_button);
         cancelButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -55,6 +63,19 @@ public class LoginActivity extends AppCompatActivity  {
     public void cancel() {
         Intent intent = new Intent(this, WelcomeActivity.class);
         startActivity(intent);
+    }
+
+    public void checkLogin(View v) {
+        TextView username = (TextView) findViewById(R.id.email);
+        TextView password = (TextView) findViewById(R.id.password);
+        //Log.d("app, user", String.valueOf(username.getText()));
+        //Log.d("app, pass", String.valueOf(password.getText()));
+        if (String.valueOf(username.getText()).equals("user") && String.valueOf(password.getText()).equals("pass")) {
+            Intent intent = new Intent(this, activity_application_main.class);
+            startActivity(intent);
+        } else {
+            Toast.makeText(this, "Invalid login!", Toast.LENGTH_SHORT).show();
+        }
     }
 
 }
