@@ -32,12 +32,18 @@ public class WelcomeActivity extends AppCompatActivity {
         });
     }
 
-    public void register() {
+    /**
+     * Starts the register activity.
+     */
+    private void register() {
         Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);
     }
 
-    public void login() {
+    /**
+     * Starts the login activity.
+     */
+    private void login() {
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
     }

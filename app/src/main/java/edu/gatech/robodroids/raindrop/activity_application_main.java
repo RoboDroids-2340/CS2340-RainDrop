@@ -20,7 +20,10 @@ public class activity_application_main extends AppCompatActivity {
         });
     }
 
-    public void logout() {
+    /**
+     * Starts the welcome screen activity.
+     */
+    private void logout() {
         Intent intent = new Intent(this, WelcomeActivity.class);
         startActivity(intent);
     }

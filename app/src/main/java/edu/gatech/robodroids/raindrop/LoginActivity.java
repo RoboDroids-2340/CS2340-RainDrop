@@ -49,7 +49,7 @@ public class LoginActivity extends AppCompatActivity  {
         final Button loginButton = (Button) findViewById(R.id.email_sign_in_button);
         loginButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                checkLogin(v);
+                checkLogin();
             }
         });
         final Button cancelButton = (Button) findViewById(R.id.cancel_button);
@@ -60,12 +60,18 @@ public class LoginActivity extends AppCompatActivity  {
         });
     }
 
-    public void cancel() {
+    /**
+     * Stops the login activity and opens the welcome screen activity.
+     */
+    private void cancel() {
         Intent intent = new Intent(this, WelcomeActivity.class);
         startActivity(intent);
     }
 
-    public void checkLogin(View v) {
+    /**
+     * Checks if the login provided is registered.
+     */
+    private void checkLogin() {
         TextView username = (TextView) findViewById(R.id.email);
         TextView password = (TextView) findViewById(R.id.password);
         //Log.d("app, user", String.valueOf(username.getText()));
