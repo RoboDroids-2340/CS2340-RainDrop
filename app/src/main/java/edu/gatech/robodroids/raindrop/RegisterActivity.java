@@ -31,11 +31,12 @@ public class RegisterActivity extends AppCompatActivity  {
         TextView name = (TextView) findViewById(R.id.email);
         TextView password = (TextView) findViewById(R.id.password);
         TextView id = (TextView) findViewById(R.id.userid);
-        UserModel user = new UserModel(name.getText().toString(), id.getText().toString(),
+        UserModel user = new UserModel(name.getText().toString(),
+                id.getText().toString().replaceAll(".", ","),
                 password.getText().toString());
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
         //TODO allow for attempted duplicates
-        mDatabase.child("users").child(id.getText().toString()).setValue(user);
+        mDatabase.child("users").child(id.getText().toString().replaceAll(".", ",")).setValue(user);
         Intent intent = new Intent(this, WelcomeActivity.class);
         startActivity(intent);
 
