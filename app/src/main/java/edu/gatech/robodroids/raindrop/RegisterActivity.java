@@ -1,38 +1,13 @@
 package edu.gatech.robodroids.raindrop;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.annotation.TargetApi;
-import android.content.pm.PackageManager;
-import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.app.LoaderManager.LoaderCallbacks;
-
-import android.content.CursorLoader;
-import android.content.Loader;
-import android.database.Cursor;
-import android.net.Uri;
-import android.os.AsyncTask;
-
-import android.os.Build;
+import android.content.Intent;
 import android.os.Bundle;
-import android.provider.ContactsContract;
-import android.text.TextUtils;
-import android.view.KeyEvent;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.inputmethod.EditorInfo;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import static android.Manifest.permission.READ_CONTACTS;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 /**
  * A login screen that offers login via email/password.
@@ -44,6 +19,26 @@ public class RegisterActivity extends AppCompatActivity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        final Button registerButton = (Button) findViewById(R.id.email_register_button);
+        registerButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                registerUser();
+            }
+        });
+    }
+
+    private void registerUser() {
+        TextView name = (TextView) findViewById(R.id.email);
+        TextView password = (TextView) findViewById(R.id.password);
+        TextView id = (TextView) findViewById(R.id.userid);
+        UserModel user = new UserModel(name.getText().toString(),
+                id.getText().toString().replaceAll(".", ","),
+                password.getText().toString());
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+        //TODO allow for attempted duplicates
+        mDatabase.child("users").child(id.getText().toString().replaceAll(".", ",")).setValue(user);
+        Intent intent = new Intent(this, WelcomeActivity.class);
+        startActivity(intent);
 
     }
 

@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "140371510000",
+    "firebase_url": "https://raindrop-f5769.firebaseio.com",
+    "project_id": "raindrop-f5769",
+    "storage_bucket": "raindrop-f5769.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:140371510000:android:ca88ed1dbd5b039c",
+        "android_client_info": {
+          "package_name": "edu.gatech.robodroids.raindrop"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "140371510000-t8ajh6uqq5s97tpjfdbu660l1lmrlhih.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "edu.gatech.robodroids.raindrop",
+            "certificate_hash": "0FA24073C0C410526BC2B16828781AEC7845B6DE"
+          }
+        },
+        {
+          "client_id": "140371510000-oojusutga6kj3mo16k80av6qk17dfann.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyALLRrABffPUqVmPoitG5w5kwNV2mP58SY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "140371510000-oojusutga6kj3mo16k80av6qk17dfann.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
