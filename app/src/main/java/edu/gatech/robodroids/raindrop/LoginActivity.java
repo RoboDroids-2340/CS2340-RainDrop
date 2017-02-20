@@ -3,6 +3,7 @@ package edu.gatech.robodroids.raindrop;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
@@ -31,6 +32,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -72,16 +79,28 @@ public class LoginActivity extends AppCompatActivity  {
      * Checks if the login provided is registered.
      */
     private void checkLogin() {
-        TextView username = (TextView) findViewById(R.id.email);
-        TextView password = (TextView) findViewById(R.id.password);
-        //Log.d("app, user", String.valueOf(username.getText()));
-        //Log.d("app, pass", String.valueOf(password.getText()));
-        if (String.valueOf(username.getText()).equals("user") && String.valueOf(password.getText()).equals("pass")) {
-            Intent intent = new Intent(this, activity_application_main.class);
-            startActivity(intent);
-        } else {
-            Toast.makeText(this, "Invalid login!", Toast.LENGTH_SHORT).show();
-        }
+        final TextView username = (TextView) findViewById(R.id.email);
+        final TextView password = (TextView) findViewById(R.id.password);
+        DatabaseReference mDatabase;
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        ValueEventListener usersListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Context ctx = getApplicationContext();
+                UserModel user = dataSnapshot.child("users").child(username.getText().toString()).getValue(UserModel.class);
+                if (user != null && user.pass.equals(password.getText().toString())) {
+                    Intent intent = new Intent(ctx, activity_application_main.class);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(ctx, "Invalid login!", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {}
+        };
+        mDatabase.addValueEventListener(usersListener);
     }
 
 }
