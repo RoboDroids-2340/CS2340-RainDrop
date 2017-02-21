@@ -15,4 +15,11 @@
     </string>
     <string name="title_activity_login">Sign in</string>
     <string name="title_activity_register">Register</string>
+    <string name="user_type_label">User type</string>
+    <string-array name="user_type_selector">
+        <item>User</item>
+        <item>Worker</item>
+        <item>Manager</item>
+        <item>Administrator</item>
+    </string-array>
 </resources>

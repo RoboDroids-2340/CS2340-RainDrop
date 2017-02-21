@@ -82,13 +82,25 @@
 
             </android.support.design.widget.TextInputLayout>
 
+            <TextView
+                android:text="@string/user_type_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView2" />
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/user_type_spinner"
+                android:entries="@array/user_type_selector" />
+
             <Button
                 android:id="@+id/email_register_button"
                 style="?android:textAppearanceSmall"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Register"
+                android:text="@string/title_activity_login"
                 android:textStyle="bold" />
 
         </LinearLayout>
