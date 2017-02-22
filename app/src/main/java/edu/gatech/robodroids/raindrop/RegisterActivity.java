@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import android.widget.Spinner;
 
 /**
  * A login screen that offers login via email/password.
@@ -31,12 +32,14 @@ public class RegisterActivity extends AppCompatActivity  {
         TextView name = (TextView) findViewById(R.id.email);
         TextView password = (TextView) findViewById(R.id.password);
         TextView id = (TextView) findViewById(R.id.userid);
+        Spinner userTypeSpinner = (Spinner) findViewById(R.id.user_type_spinner);
         UserModel user = new UserModel(name.getText().toString(),
-                id.getText().toString().replaceAll(".", ","),
-                password.getText().toString());
+                id.getText().toString().replaceAll("\\.", ","),
+                password.getText().toString(),
+                userTypeSpinner.getSelectedItem().toString());
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
         //TODO allow for attempted duplicates
-        mDatabase.child("users").child(id.getText().toString().replaceAll(".", ",")).setValue(user);
+        mDatabase.child("users").child(id.getText().toString().replaceAll("\\.", ",")).setValue(user);
         Intent intent = new Intent(this, WelcomeActivity.class);
         startActivity(intent);
 
