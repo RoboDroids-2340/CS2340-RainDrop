@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -29,6 +30,7 @@ public class EditActivity extends AppCompatActivity {
     TextView nameText;
     final FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference ref = database.getReference("users");
+    String userid;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,7 +38,7 @@ public class EditActivity extends AppCompatActivity {
         emailText = (TextView) findViewById(R.id.current_email);
         passwordText = (TextView) findViewById(R.id.current_password);
         nameText = (TextView) findViewById(R.id.current_name);
-
+        userid = getIntent().getStringExtra("userid");
 
         final Button confirmButton = (Button) findViewById(R.id.confirm_button);
         confirmButton.setOnClickListener(new View.OnClickListener() {
@@ -44,16 +46,17 @@ public class EditActivity extends AppCompatActivity {
                 confirm();
             }
         });
-        DatabaseReference mDatabase;
+        final DatabaseReference mDatabase;
         mDatabase = FirebaseDatabase.getInstance().getReference();
         ValueEventListener usersListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 UserModel user = dataSnapshot.child("users").child(
-                        getIntent().getStringExtra("userid")).getValue(UserModel.class);
+                        userid).getValue(UserModel.class);
                 nameText.setText("Name: " + user.name);
                 emailText.setText( "Email: " + user.userid);
                 passwordText.setText("Password:  " + user.pass);
+                mDatabase.removeEventListener(this);
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {}
@@ -67,18 +70,24 @@ public class EditActivity extends AppCompatActivity {
         final TextView name = (TextView) findViewById(R.id.name);
         final TextView email = (TextView) findViewById(R.id.email);
         final TextView password = (TextView) findViewById(R.id.password);
-        final String userid = getIntent().getStringExtra("userid");
-
+        userid = getIntent().getStringExtra("userid");
+        String newuserid = userid;
         final Map<String, Object> userUpdates = new HashMap<>();
-        if (name.getText().toString() != null) {
+        if (!name.getText().toString().equals("")) {
             userUpdates.put("name", name.getText().toString());
         }
-        if (email.getText().toString() != null) {
-            userUpdates.put("userid", email.getText().toString());
-        }
-        if (password.getText().toString() != null) {
+        //if (!email.getText().toString().equals("")) {
+          //  userUpdates.put("userid", email.getText().toString());
+           // newuserid = email.getText().toString();
+        //}
+        if (!password.getText().toString().equals("")) {
             userUpdates.put("pass", password.getText().toString());
         }
         ref.child(userid).updateChildren(userUpdates);
+        userid = newuserid;
+        Context ctx = getApplicationContext();
+        Intent intent = new Intent(ctx, activity_application_main.class);
+        intent.putExtra("userid", userid);
+        startActivity(intent);
     }
 }

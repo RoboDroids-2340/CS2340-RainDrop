@@ -81,7 +81,7 @@ public class LoginActivity extends AppCompatActivity  {
     private void checkLogin() {
         final TextView username = (TextView) findViewById(R.id.email);
         final TextView password = (TextView) findViewById(R.id.password);
-        DatabaseReference mDatabase;
+        final DatabaseReference mDatabase;
         mDatabase = FirebaseDatabase.getInstance().getReference();
         ValueEventListener usersListener = new ValueEventListener() {
             @Override
@@ -93,6 +93,7 @@ public class LoginActivity extends AppCompatActivity  {
                     Intent intent = new Intent(ctx, activity_application_main.class);
                     intent.putExtra("userid", user.userid);
                     startActivity(intent);
+                    mDatabase.removeEventListener(this);
                 } else {
                     Toast.makeText(ctx, "Invalid login!", Toast.LENGTH_SHORT).show();
                 }
