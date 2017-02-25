@@ -10,40 +10,60 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="edu.gatech.robodroids.raindrop.LoginActivity">
 
-    <!-- Login progress -->
-    <ProgressBar
-        android:id="@+id/login_progress"
-        style="?android:attr/progressBarStyleLarge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:visibility="gone" />
+    <!-- Edit progress -->
 
     <ScrollView
-        android:id="@+id/login_form"
+        android:id="@+id/edit_form"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <LinearLayout
-            android:id="@+id/email_login_form"
+            android:id="@+id/edit_profile_form"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <android.support.design.widget.TextInputLayout
+            <TextView
+                android:text="Current Name:"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/current_name" />
+
+            <TextView
+                android:text="Current Email:"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/current_email" />
+
+            <TextView
+                android:text="Current Password:"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/current_password" />
+
+            <AutoCompleteTextView
+                android:id="@+id/name"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:hint="New Name"
+                android:inputType="textEmailAddress"
+                android:maxLines="1"
+                android:singleLine="true" />
 
                 <AutoCompleteTextView
                     android:id="@+id/email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/prompt_email"
+                    android:hint="New Email"
                     android:inputType="textEmailAddress"
                     android:maxLines="1"
                     android:singleLine="true" />
-
-            </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
@@ -53,7 +73,7 @@
                     android:id="@+id/password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/prompt_password"
+                    android:hint="New Password"
                     android:imeActionId="@+id/login"
                     android:imeActionLabel="@string/action_sign_in_short"
                     android:imeOptions="actionUnspecified"

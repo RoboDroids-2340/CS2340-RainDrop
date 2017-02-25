@@ -21,24 +21,49 @@ import com.google.firebase.database.ValueEventListener;
 
 public class EditActivity extends AppCompatActivity {
 
+    TextView emailText;
+    TextView passwordText;
+    TextView nameText;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit);
-        final TextView userText = (TextView) findViewById(R.id.userid);
+        emailText = (TextView) findViewById(R.id.current_email);
+        passwordText = (TextView) findViewById(R.id.current_password);
+        nameText = (TextView) findViewById(R.id.current_name);
 
+
+        final Button confirmButton = (Button) findViewById(R.id.confirm_button);
+        confirmButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                confirm();
+            }
+        });
         DatabaseReference mDatabase;
         mDatabase = FirebaseDatabase.getInstance().getReference();
         ValueEventListener usersListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Context ctx = getApplicationContext();
                 UserModel user = dataSnapshot.child("users").child(
                         getIntent().getStringExtra("userid")).getValue(UserModel.class);
-                userText.setText(user.userid);
+                nameText.setText(nameText.getText() + " " + user.name);
+                emailText.setText(emailText.getText() + " " + user.userid);
+                passwordText.setText(passwordText.getText() + " " + user.pass);
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {}
         };
         mDatabase.addValueEventListener(usersListener);
+
+
+    }
+
+    private void confirm() {
+        final TextView name = (TextView) findViewById(R.id.name);
+        final TextView email = (TextView) findViewById(R.id.email);
+        final TextView password = (TextView) findViewById(R.id.password);
+
+        //THIS IS THE TODO
+
     }
 }
