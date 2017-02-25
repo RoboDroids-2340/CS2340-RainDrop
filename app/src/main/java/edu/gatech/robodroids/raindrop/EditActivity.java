@@ -15,6 +15,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by jjacob on 2/24/17.
  */
@@ -24,6 +27,8 @@ public class EditActivity extends AppCompatActivity {
     TextView emailText;
     TextView passwordText;
     TextView nameText;
+    final FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference ref = database.getReference("users");
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,9 +51,9 @@ public class EditActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 UserModel user = dataSnapshot.child("users").child(
                         getIntent().getStringExtra("userid")).getValue(UserModel.class);
-                nameText.setText(nameText.getText() + " " + user.name);
-                emailText.setText(emailText.getText() + " " + user.userid);
-                passwordText.setText(passwordText.getText() + " " + user.pass);
+                nameText.setText("Name: " + user.name);
+                emailText.setText( "Email: " + user.userid);
+                passwordText.setText("Password:  " + user.pass);
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {}
@@ -62,8 +67,18 @@ public class EditActivity extends AppCompatActivity {
         final TextView name = (TextView) findViewById(R.id.name);
         final TextView email = (TextView) findViewById(R.id.email);
         final TextView password = (TextView) findViewById(R.id.password);
+        final String userid = getIntent().getStringExtra("userid");
 
-        //THIS IS THE TODO
-
+        final Map<String, Object> userUpdates = new HashMap<>();
+        if (name.getText().toString() != null) {
+            userUpdates.put("name", name.getText().toString());
+        }
+        if (email.getText().toString() != null) {
+            userUpdates.put("userid", email.getText().toString());
+        }
+        if (password.getText().toString() != null) {
+            userUpdates.put("pass", password.getText().toString());
+        }
+        ref.child(userid).updateChildren(userUpdates);
     }
 }
