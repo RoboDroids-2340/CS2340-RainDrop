@@ -68,7 +68,6 @@ public class EditActivity extends AppCompatActivity {
 
     private void confirm() {
         final TextView name = (TextView) findViewById(R.id.name);
-        final TextView email = (TextView) findViewById(R.id.email);
         final TextView password = (TextView) findViewById(R.id.password);
         userid = getIntent().getStringExtra("userid");
         String newuserid = userid;
