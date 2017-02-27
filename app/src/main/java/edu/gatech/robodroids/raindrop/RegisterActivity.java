@@ -28,6 +28,9 @@ public class RegisterActivity extends AppCompatActivity  {
         });
     }
 
+    /**
+     * Method to register a new user, uses firebase as a database to store registered users.
+     */
     private void registerUser() {
         TextView name = (TextView) findViewById(R.id.email);
         TextView password = (TextView) findViewById(R.id.password);
