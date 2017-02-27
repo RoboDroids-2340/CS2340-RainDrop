@@ -28,6 +28,9 @@
         <activity
             android:name=".RegisterActivity"
             android:label="@string/title_activity_register" />
+        <activity
+            android:name=".EditActivity"
+            android:label="Edit" />
         <activity android:name=".activity_application_main"></activity>
     </application>
 
