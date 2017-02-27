@@ -93,11 +93,10 @@ public class LoginActivity extends AppCompatActivity  {
                     Intent intent = new Intent(ctx, activity_application_main.class);
                     intent.putExtra("userid", user.userid);
                     startActivity(intent);
-                    mDatabase.removeEventListener(this);
                 } else {
                     Toast.makeText(ctx, "Invalid login!", Toast.LENGTH_SHORT).show();
                 }
-
+                mDatabase.removeEventListener(this);
             }
 
             @Override
