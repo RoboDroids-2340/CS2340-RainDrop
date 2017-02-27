@@ -34,6 +34,9 @@ public class activity_application_main extends AppCompatActivity {
         startActivity(intent);
     }
 
+    /**
+     *  Starts the edit profile activity.
+     */
     private void edit() {
         Intent intent = new Intent(this, EditActivity.class);
         intent.putExtra("userid", getIntent().getStringExtra("userid"));
