@@ -19,11 +19,20 @@
         android:layout_marginTop="72dp"
         android:id="@+id/textView" />
     <Button
-        android:id="@+id/logout_button"
+        android:id="@+id/edit_button"
         style="?android:textAppearanceSmall"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:text="Edit Profile"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/logout_button"
+        style="?android:textAppearanceSmall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="400dp"
         android:text="Logout"
         android:textStyle="bold" />
 </RelativeLayout>

@@ -18,6 +18,12 @@ public class activity_application_main extends AppCompatActivity {
                 logout();
             }
         });
+        final Button edit_button = (Button) findViewById(R.id.edit_button);
+        edit_button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                edit();
+            }
+        });
     }
 
     /**
@@ -25,6 +31,12 @@ public class activity_application_main extends AppCompatActivity {
      */
     private void logout() {
         Intent intent = new Intent(this, WelcomeActivity.class);
+        startActivity(intent);
+    }
+
+    private void edit() {
+        Intent intent = new Intent(this, EditActivity.class);
+        intent.putExtra("userid", getIntent().getStringExtra("userid"));
         startActivity(intent);
     }
 }
