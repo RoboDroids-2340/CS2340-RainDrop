@@ -32,6 +32,7 @@ public class EditActivity extends AppCompatActivity {
     DatabaseReference ref = database.getReference("users");
     String userid;
 
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit);
@@ -66,6 +67,9 @@ public class EditActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Method called to edit user account when confirm button is pressed.
+     */
     private void confirm() {
         final TextView name = (TextView) findViewById(R.id.name);
         final TextView password = (TextView) findViewById(R.id.password);
