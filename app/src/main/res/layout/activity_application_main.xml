@@ -35,4 +35,14 @@
         android:layout_marginTop="400dp"
         android:text="Logout"
         android:textStyle="bold" />
+    <Button
+            android:text="Create Water Report"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView"
+            android:layout_marginTop="46dp" android:id="@+id/report_button"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"/>
 </RelativeLayout>

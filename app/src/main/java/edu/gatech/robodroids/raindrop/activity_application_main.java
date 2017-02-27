@@ -24,6 +24,12 @@ public class activity_application_main extends AppCompatActivity {
                 edit();
             }
         });
+        final Button report_button = (Button) findViewById(R.id.report_button);
+        report_button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                createReport();
+            }
+        });
     }
 
     /**
@@ -40,6 +46,15 @@ public class activity_application_main extends AppCompatActivity {
     private void edit() {
         Intent intent = new Intent(this, EditActivity.class);
         intent.putExtra("userid", getIntent().getStringExtra("userid"));
+        startActivity(intent);
+    }
+
+    /**
+     *  Opens the water report creator activity.
+     */
+    private void createReport() {
+        Intent intent = new Intent(this, CreateReportActivity.class);
+        intent.putExtra("user", getIntent().getParcelableExtra("user"));
         startActivity(intent);
     }
 }
