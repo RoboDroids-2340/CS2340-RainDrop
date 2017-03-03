@@ -28,14 +28,6 @@
         android:textStyle="bold" />
 
     <Button
-        android:id="@+id/logout_button"
-        style="?android:textAppearanceSmall"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="400dp"
-        android:text="Logout"
-        android:textStyle="bold" />
-    <Button
             android:text="Create Water Report"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -45,4 +37,14 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"/>
+    <Button
+            android:id="@+id/logout_button"
+            style="?android:textAppearanceSmall"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Logout"
+            android:textStyle="bold" android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="100dp"/>
 </RelativeLayout>

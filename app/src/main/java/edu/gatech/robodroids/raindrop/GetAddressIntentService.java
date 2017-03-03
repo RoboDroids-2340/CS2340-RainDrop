@@ -14,7 +14,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-
+/**
+ * Intent service to convert locations to addresses.
+ */
 public class GetAddressIntentService extends IntentService {
 
     protected ResultReceiver mReceiver;
@@ -55,6 +57,11 @@ public class GetAddressIntentService extends IntentService {
         }
     }
 
+    /**
+     * Delievers results to the receiver in create report activity.
+     * @param resultCode Result of success or not.
+     * @param msg Error or success message.
+     */
     private void deliverResultToReciever(int resultCode, String msg) {
         Bundle bundle = new Bundle();
         bundle.putString("result", msg);
