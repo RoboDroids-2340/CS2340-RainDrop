@@ -1,5 +1,8 @@
 package edu.gatech.robodroids.raindrop;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 /**
  * Water Report Class
@@ -7,7 +10,7 @@ import java.util.Date;
  */
 public class WaterReportModel {
 
-    private Date submissionTime;
+    private String submissionTime;
     private int reportNumber;
     //TODO Change numOfReports to a database reference.
     private static int numOfReports;
@@ -23,8 +26,8 @@ public class WaterReportModel {
      * @param condition condition of water source.
      * @param name name of who created report
      */
-    public WaterReportModel(String location, String type, String condition, String name) {
-        submissionTime = new Date();
+    public WaterReportModel(String location, String type, String condition, String name, String subTime) {
+        submissionTime = subTime;
         waterLocation = location;
         waterType = type;
         waterCondition = condition;
@@ -32,11 +35,14 @@ public class WaterReportModel {
         reporterName = name;
     }
 
+    public WaterReportModel() {
+
+    }
     /**
      * Get submission time.
      * @return Report submission time.
      */
-    public Date getSubmissionTime() {
+    public String getSubmissionTime() {
         return submissionTime;
     }
 
@@ -85,8 +91,12 @@ public class WaterReportModel {
      * @return Water Report info.
      */
     public String toString() {
+        DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss.SSS");
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(Long.parseLong(submissionTime));
+        String actualDate = formatter.format(calendar.getTime());
         return String.format(
                 "Created by: %s. Location: %s. Type: %s. Condition: %s. Date Received: %s. Report Number: %d",
-                reporterName, waterLocation, waterType, waterCondition, submissionTime.toString(), reportNumber);
+                reporterName, waterLocation, waterType, waterCondition, actualDate, reportNumber);
     }
 }

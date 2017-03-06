@@ -30,6 +30,12 @@ public class activity_application_main extends AppCompatActivity {
                 createReport();
             }
         });
+        final Button view_report_button = (Button) findViewById(R.id.buttonview);
+        view_report_button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                viewReports();
+            }
+        });
     }
 
     /**
@@ -55,6 +61,11 @@ public class activity_application_main extends AppCompatActivity {
     private void createReport() {
         Intent intent = new Intent(this, CreateReportActivity.class);
         intent.putExtra("user", getIntent().getParcelableExtra("user"));
+        startActivity(intent);
+    }
+
+    private void viewReports() {
+        Intent intent = new Intent(this, ViewWaterReports.class);
         startActivity(intent);
     }
 }
