@@ -2,6 +2,7 @@ package edu.gatech.robodroids.raindrop;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.icu.text.DateFormat;
 import android.location.Location;
 import android.os.Handler;
 import android.os.ResultReceiver;
@@ -20,6 +21,10 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.Date;
 
 public class CreateReportActivity extends AppCompatActivity implements
         GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
@@ -104,6 +109,8 @@ public class CreateReportActivity extends AppCompatActivity implements
                     conditionSpinner.getSelectedItem().toString(),
                     user.name);
 
+            DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+            mDatabase.child("water_reports").child(report.getReportNumber()+"").setValue(report);
             Toast.makeText(getApplicationContext(),
                     "Successfully created a report with report number: " + report.getReportNumber(),
                     Toast.LENGTH_LONG).show();

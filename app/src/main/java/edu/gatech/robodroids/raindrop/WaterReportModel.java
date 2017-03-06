@@ -21,7 +21,7 @@ public class WaterReportModel {
      * @param location location of water source.
      * @param type type of water source.
      * @param condition condition of water source.
-     * @param name name of who created report.
+     * @param name name of who created report
      */
     public WaterReportModel(String location, String type, String condition, String name) {
         submissionTime = new Date();
