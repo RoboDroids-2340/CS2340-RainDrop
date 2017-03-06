@@ -107,7 +107,9 @@ public class CreateReportActivity extends AppCompatActivity implements
                     mAddress.getText().toString(),
                     typeSpinner.getSelectedItem().toString(),
                     conditionSpinner.getSelectedItem().toString(),
-                    user.name);
+                    user.name,
+                    System.currentTimeMillis()+"");
+                    //TODO the time is a dirty hack
 
             DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
             mDatabase.child("water_reports").child(report.getReportNumber()+"").setValue(report);
