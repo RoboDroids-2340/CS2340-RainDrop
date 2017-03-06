@@ -118,6 +118,7 @@ public class CreateReportActivity extends AppCompatActivity implements
                     Toast.LENGTH_LONG).show();
             Intent intent = new Intent(this, activity_application_main.class);
             intent.putExtra("user", user);
+            intent.putExtra("userid", user.userid);
             startActivity(intent);
         } else {
             Toast.makeText(getApplicationContext(),
