@@ -6,6 +6,8 @@
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <!-- To get current location for water reports -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -13,6 +15,12 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <!-- Service to convert location to address in background -->
+        <service
+            android:name=".GetAddressIntentService"
+            android:exported="false" />
+
         <activity
             android:name=".WelcomeActivity"
             android:label="@string/app_name">
@@ -31,7 +39,12 @@
         <activity
             android:name=".EditActivity"
             android:label="Edit" />
-        <activity android:name=".activity_application_main"></activity>
+        <activity android:name=".activity_application_main" />
+        <activity android:name=".CreateReportActivity"></activity>
+        <activity
+            android:name=".ViewWaterReports"
+            android:label="@string/title_activity_view_water_reports"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

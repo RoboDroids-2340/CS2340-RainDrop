@@ -24,6 +24,18 @@ public class activity_application_main extends AppCompatActivity {
                 edit();
             }
         });
+        final Button report_button = (Button) findViewById(R.id.report_button);
+        report_button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                createReport();
+            }
+        });
+        final Button view_report_button = (Button) findViewById(R.id.buttonview);
+        view_report_button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                viewReports();
+            }
+        });
     }
 
     /**
@@ -40,6 +52,20 @@ public class activity_application_main extends AppCompatActivity {
     private void edit() {
         Intent intent = new Intent(this, EditActivity.class);
         intent.putExtra("userid", getIntent().getStringExtra("userid"));
+        startActivity(intent);
+    }
+
+    /**
+     *  Opens the water report creator activity.
+     */
+    private void createReport() {
+        Intent intent = new Intent(this, CreateReportActivity.class);
+        intent.putExtra("user", getIntent().getParcelableExtra("user"));
+        startActivity(intent);
+    }
+
+    private void viewReports() {
+        Intent intent = new Intent(this, ViewWaterReports.class);
         startActivity(intent);
     }
 }

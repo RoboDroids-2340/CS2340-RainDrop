@@ -31,6 +31,7 @@ public class EditActivity extends AppCompatActivity {
     final FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference ref = database.getReference("users");
     String userid;
+    UserModel userStatic;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +59,7 @@ public class EditActivity extends AppCompatActivity {
                 emailText.setText( "Email: " + user.userid);
                 passwordText.setText("Password:  " + user.pass);
                 mDatabase.removeEventListener(this);
+                userStatic = user;
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {}
@@ -90,6 +92,7 @@ public class EditActivity extends AppCompatActivity {
         userid = newuserid;
         Context ctx = getApplicationContext();
         Intent intent = new Intent(ctx, activity_application_main.class);
+        intent.putExtra("user", userStatic);
         intent.putExtra("userid", userid);
         startActivity(intent);
     }
