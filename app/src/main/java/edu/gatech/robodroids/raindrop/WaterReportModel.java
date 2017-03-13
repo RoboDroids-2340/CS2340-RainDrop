@@ -38,6 +38,9 @@ public class WaterReportModel {
         reporterName = name;
     }
 
+    /**
+     * No arg default constructor for a water report.
+     */
     public WaterReportModel() {
 
     }
@@ -95,18 +98,34 @@ public class WaterReportModel {
                 reporterName, lat, lon, waterType, waterCondition, actualDate, reportNumber);
     }
 
+    /**
+     * Returns the longitudinal value of the water source's location.
+     * @return longitudinal value.
+     */
     public double getLon() {
         return lon;
     }
 
+    /**
+     * Returns the latitudinal value of the water source's location.
+     * @return latitudinal value.
+     */
     public double getLat() {
         return lat;
     }
 
+    /**
+     * Sets the longitudinal value of the water source's location.
+     * @param lon longitudinal value.
+     */
     public void setLon(double lon) {
         this.lon = lon;
     }
 
+    /**
+     * Returns the latitudinal value of the water source's location.
+     * @param lat latitudinal value.
+     */
     public void setLat(double lat) {
         this.lat = lat;
     }
