@@ -70,12 +70,18 @@ public class activity_application_main extends AppCompatActivity {
         startActivity(intent);
     }
 
+    /**
+     * Opens the water report viewer activity.
+     */
     private void viewReports() {
         //TODO: put extra?
         Intent intent = new Intent(this, ViewWaterReports.class);
         startActivity(intent);
     }
 
+    /**
+     * Opens the map viewing activity.
+     */
     private void viewMap() {
         Intent intent = new Intent(this, ViewMap.class);
         startActivity(intent);

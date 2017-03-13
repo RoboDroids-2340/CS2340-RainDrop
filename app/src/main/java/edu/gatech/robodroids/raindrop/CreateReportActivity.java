@@ -98,7 +98,6 @@ public class CreateReportActivity extends AppCompatActivity implements
 
     /**
      * Creates a new water report.
-     * TODO send water report to database.
      */
     private void submit() {
         if (typeSpinner.getSelectedItem() != null && conditionSpinner.getSelectedItem() != null) {
