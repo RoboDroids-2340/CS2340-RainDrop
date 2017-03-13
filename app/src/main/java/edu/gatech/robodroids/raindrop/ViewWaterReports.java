@@ -2,12 +2,14 @@ package edu.gatech.robodroids.raindrop;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -42,13 +44,16 @@ public class ViewWaterReports extends AppCompatActivity {
         ValueEventListener usersListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                Log.d("bzm","attaching listener");
                 Context ctx = getApplicationContext();
                 int i = 0;
                 for (DataSnapshot snapshot : dataSnapshot.child("water_reports").getChildren()) {
                     WaterReportModel waterReport = snapshot.getValue(WaterReportModel.class);
                     if (waterReport != null) {
+                        Log.d("bzm","adding");
                         TextView info = new TextView(ctx);
                         info.setText(waterReport.toString());
+                        info.setTextColor(Color.BLACK);
                         reports.addView(info, i);
                         i++;
                     }
