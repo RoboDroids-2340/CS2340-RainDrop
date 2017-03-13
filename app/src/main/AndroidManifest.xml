@@ -21,6 +21,10 @@
             android:name=".GetAddressIntentService"
             android:exported="false" />
 
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyC46JmgIq7DWuspDskvN9rIwCVkJdgx4hE" />
+
         <activity
             android:name=".WelcomeActivity"
             android:label="@string/app_name">
@@ -40,10 +44,14 @@
             android:name=".EditActivity"
             android:label="Edit" />
         <activity android:name=".activity_application_main" />
-        <activity android:name=".CreateReportActivity"></activity>
+        <activity android:name=".CreateReportActivity" />
         <activity
             android:name=".ViewWaterReports"
             android:label="@string/title_activity_view_water_reports"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ViewMap"
+            android:label="@string/title_activity_view_map"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

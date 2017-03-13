@@ -36,6 +36,12 @@ public class activity_application_main extends AppCompatActivity {
                 viewReports();
             }
         });
+        final Button view_map_button = (Button) findViewById(R.id.viewmapbutton);
+        view_map_button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                viewMap();
+            }
+        });
     }
 
     /**
@@ -65,7 +71,13 @@ public class activity_application_main extends AppCompatActivity {
     }
 
     private void viewReports() {
+        //TODO: put extra?
         Intent intent = new Intent(this, ViewWaterReports.class);
+        startActivity(intent);
+    }
+
+    private void viewMap() {
+        Intent intent = new Intent(this, ViewMap.class);
         startActivity(intent);
     }
 }

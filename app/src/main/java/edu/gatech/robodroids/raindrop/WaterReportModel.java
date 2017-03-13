@@ -14,21 +14,24 @@ public class WaterReportModel {
     private int reportNumber;
     //TODO Change numOfReports to a database reference.
     private static int numOfReports;
-    private String waterLocation;
+    private double lat;
+    private double lon;
     private String waterType;
     private String waterCondition;
     private String reporterName;
 
     /**
      * Create new water report
-     * @param location location of water source.
+     * @param lat latitude of water source
+     * @param lon longitude of water source
      * @param type type of water source.
      * @param condition condition of water source.
      * @param name name of who created report
      */
-    public WaterReportModel(String location, String type, String condition, String name, String subTime) {
+    public WaterReportModel(double lat, double lon, String type, String condition, String name, String subTime) {
         submissionTime = subTime;
-        waterLocation = location;
+        this.lat = lat;
+        this.lon = lon;
         waterType = type;
         waterCondition = condition;
         reportNumber = ++numOfReports;
@@ -52,14 +55,6 @@ public class WaterReportModel {
      */
     public int getReportNumber() {
         return reportNumber;
-    }
-
-    /**
-     * Get report location.
-     * @return Report location.
-     */
-    public String getWaterLocation() {
-        return waterLocation;
     }
 
     /**
@@ -96,7 +91,23 @@ public class WaterReportModel {
         calendar.setTimeInMillis(Long.parseLong(submissionTime));
         String actualDate = formatter.format(calendar.getTime());
         return String.format(
-                "Created by: %s. Location: %s. Type: %s. Condition: %s. Date Received: %s. Report Number: %d",
-                reporterName, waterLocation, waterType, waterCondition, actualDate, reportNumber);
+                "Created by: %s. Latitude: %f. Longitude: %f. Type: %s. Condition: %s. Date Received: %s. Report Number: %d",
+                reporterName, lat, lon, waterType, waterCondition, actualDate, reportNumber);
+    }
+
+    public double getLon() {
+        return lon;
+    }
+
+    public double getLat() {
+        return lat;
+    }
+
+    public void setLon(double lon) {
+        this.lon = lon;
+    }
+
+    public void setLat(double lat) {
+        this.lat = lat;
     }
 }
