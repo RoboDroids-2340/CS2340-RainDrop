@@ -5,8 +5,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class activity_application_main extends AppCompatActivity {
+
+    private UserModel user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +45,13 @@ public class activity_application_main extends AppCompatActivity {
                 viewMap();
             }
         });
+        final Button create_quality_report = (Button) findViewById(R.id.quality_report);
+        create_quality_report.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                createQualityReport();
+            }
+        });
+        user = getIntent().getParcelableExtra("user");
     }
 
     /**
@@ -57,7 +67,7 @@ public class activity_application_main extends AppCompatActivity {
      */
     private void edit() {
         Intent intent = new Intent(this, EditActivity.class);
-        intent.putExtra("userid", getIntent().getStringExtra("userid"));
+        intent.putExtra("userid", user.userid);
         startActivity(intent);
     }
 
@@ -66,7 +76,7 @@ public class activity_application_main extends AppCompatActivity {
      */
     private void createReport() {
         Intent intent = new Intent(this, CreateReportActivity.class);
-        intent.putExtra("user", getIntent().getParcelableExtra("user"));
+        intent.putExtra("user", user);
         startActivity(intent);
     }
 
@@ -85,5 +95,20 @@ public class activity_application_main extends AppCompatActivity {
     private void viewMap() {
         Intent intent = new Intent(this, ViewMap.class);
         startActivity(intent);
+    }
+
+    /**
+     * Opens quality report creator activity, only if user has proper access level.
+     */
+    private void createQualityReport() {
+        if (user.type.equals("User")) {
+            Toast.makeText(getApplicationContext(),
+                    "You do not have the proper access level for that!",
+                    Toast.LENGTH_SHORT).show();
+        } else {
+            Intent intent = new Intent(this, CreateQualityReportActivity.class);
+            intent.putExtra("user", user);
+            startActivity(intent);
+        }
     }
 }
