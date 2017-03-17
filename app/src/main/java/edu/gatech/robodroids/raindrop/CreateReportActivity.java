@@ -2,7 +2,6 @@ package edu.gatech.robodroids.raindrop;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.icu.text.DateFormat;
 import android.location.Location;
 import android.os.Handler;
 import android.os.ResultReceiver;
@@ -24,8 +23,6 @@ import com.google.android.gms.location.LocationServices;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.Date;
-
 public class CreateReportActivity extends AppCompatActivity implements
         GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
 
@@ -33,7 +30,8 @@ public class CreateReportActivity extends AppCompatActivity implements
     private GoogleApiClient mGoogleApiClient;
     private Location mLastLocation;
     private AddressResultReceiver mReceiver;
-    private EditText mAddress;
+    private EditText mLat;
+    private EditText mLon;
     private LocationRequest mLocationRequest;
     private Spinner typeSpinner;
     private Spinner conditionSpinner;
@@ -49,12 +47,12 @@ public class CreateReportActivity extends AppCompatActivity implements
 
         @Override
         protected void onReceiveResult(int resultCode, Bundle resultData) {
-            if (resultCode == 1) {
+            /**if (resultCode == 1) {
                 mAddress.setText(resultData.getString("result"));
             } else {
                 mAddress.setText("No address found.");
                 Log.d("AddressError: ", resultData.getString("msg"));
-            }
+            }**/
         }
     }
 
@@ -86,7 +84,8 @@ public class CreateReportActivity extends AppCompatActivity implements
             }
         });
 
-        mAddress = (EditText) findViewById(R.id.address_field);
+        mLat = (EditText) findViewById(R.id.lat);
+        mLon = (EditText) findViewById(R.id.lon);
         mLocationRequest = LocationRequest.create();
         mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
         mGoogleApiClient = new GoogleApiClient.Builder(this)
@@ -99,12 +98,12 @@ public class CreateReportActivity extends AppCompatActivity implements
 
     /**
      * Creates a new water report.
-     * TODO send water report to database.
      */
     private void submit() {
         if (typeSpinner.getSelectedItem() != null && conditionSpinner.getSelectedItem() != null) {
             WaterReportModel report = new WaterReportModel(
-                    mAddress.getText().toString(),
+                    Double.parseDouble(mLat.getText().toString()),
+                    Double.parseDouble(mLon.getText().toString()),
                     typeSpinner.getSelectedItem().toString(),
                     conditionSpinner.getSelectedItem().toString(),
                     user.name,
@@ -148,7 +147,7 @@ public class CreateReportActivity extends AppCompatActivity implements
             LocationServices.FusedLocationApi.requestLocationUpdates(
                     mGoogleApiClient, mLocationRequest, this);
         } else {
-            mAddress.setText("Location permissions not enabled");
+            //mAddress.setText("Location permissions not enabled");
         }
     }
 
@@ -159,7 +158,7 @@ public class CreateReportActivity extends AppCompatActivity implements
             startIntentService();
         } else {
             Log.d("LocationError:", "No location found");
-            mAddress.setText("No location found");
+            //mAddress.setText("No location found");
         }
     }
 

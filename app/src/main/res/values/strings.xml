@@ -24,4 +24,5 @@
         <item>Administrator</item>
     </string-array>
     <string name="title_activity_view_water_reports">ViewWaterReports</string>
+    <string name="title_activity_view_map">ViewMap</string>
 </resources>
