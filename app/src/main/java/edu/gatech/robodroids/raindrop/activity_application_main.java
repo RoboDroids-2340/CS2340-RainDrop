@@ -51,6 +51,12 @@ public class activity_application_main extends AppCompatActivity {
                 createQualityReport();
             }
         });
+        final Button quality_report_view = (Button) findViewById(R.id.quality_report_view);
+        quality_report_view.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                viewQualityReports();
+            }
+        });
         user = getIntent().getParcelableExtra("user");
     }
 
@@ -108,6 +114,20 @@ public class activity_application_main extends AppCompatActivity {
         } else {
             Intent intent = new Intent(this, CreateQualityReportActivity.class);
             intent.putExtra("user", user);
+            startActivity(intent);
+        }
+    }
+
+    /**
+     * Opens quality report viewer activity.
+     */
+    private void viewQualityReports() {
+        if (!user.type.equals("Manager")) {
+            Toast.makeText(getApplicationContext(),
+                    "You do not have the proper access level for that!",
+                    Toast.LENGTH_SHORT).show();
+        } else {
+            Intent intent = new Intent(this, ViewQualityReports.class);
             startActivity(intent);
         }
     }
