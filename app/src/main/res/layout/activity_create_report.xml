@@ -17,7 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true" android:id="@+id/report_title"
+            android:layout_centerHorizontal="true" android:id="@+id/quality_title"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"/>
     <Spinner
             android:layout_width="match_parent"
@@ -34,7 +34,7 @@
             android:layout_marginTop="33dp" android:id="@+id/water_type"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:layout_below="@+id/report_title"
+            android:layout_below="@+id/quality_title"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_alignParentRight="true"

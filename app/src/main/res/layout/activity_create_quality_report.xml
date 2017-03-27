@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_create_quality_report"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="edu.gatech.robodroids.raindrop.CreateQualityReportActivity">
+
+    <TextView
+            android:text="Create Quality Report"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" android:id="@+id/quality_title"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"/>
+    <TextView
+            android:text="Water Condition"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/type_spinner"
+            android:layout_marginTop="47dp" android:id="@+id/water_condition"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textAlignment="center"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"/>
+    <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/condition_spinner"
+            android:layout_marginTop="36dp"
+            android:layout_below="@+id/water_condition"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:textAlignment="center"/>
+
+    <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="10dp" android:id="@+id/submit_report"
+            android:text="Submit Report"/>
+
+    <TextView
+            android:text="Virus PPM"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/condition_spinner"
+            android:layout_centerHorizontal="true" android:id="@+id/virus_ppm_title"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
+    <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:ems="10"
+            android:id="@+id/virus_ppm"
+            android:layout_below="@+id/virus_ppm_title"
+            android:layout_alignLeft="@+id/lon"
+            android:layout_alignStart="@+id/lon"
+            android:textAlignment="center"/>
+    <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:ems="10"
+            android:id="@+id/lon"
+            android:numeric="decimal"
+            android:layout_above="@+id/submit_report"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="15dp"
+            android:textAlignment="center"/>
+    <TextView
+            android:text="Your Longitude"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView3"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textAlignment="center"
+            android:layout_alignBottom="@+id/lon"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="46dp"/>
+    <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:ems="10"
+            android:id="@+id/lat"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:numeric="decimal"
+            android:layout_above="@+id/textView3"
+            android:layout_alignLeft="@+id/lon"
+            android:layout_alignStart="@+id/lon"
+            android:layout_alignRight="@+id/lon"
+            android:layout_alignEnd="@+id/lon"/>
+    <TextView
+            android:text="Your Latitude"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/your_location"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textAlignment="center"
+            android:layout_above="@+id/lat"
+            android:layout_centerHorizontal="true"/>
+    <TextView
+            android:text="Contaminant PPM"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/virus_ppm"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="14dp" android:id="@+id/cont_ppm_title"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
+    <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:ems="10"
+            android:id="@+id/cont_ppm"
+            android:layout_centerVertical="true"
+            android:layout_alignLeft="@+id/virus_ppm"
+            android:layout_alignStart="@+id/virus_ppm"
+            android:textAlignment="center"/>
+</RelativeLayout>
