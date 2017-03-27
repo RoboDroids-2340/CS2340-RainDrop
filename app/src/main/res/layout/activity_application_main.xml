@@ -59,23 +59,32 @@
             android:layout_alignParentStart="true"
             android:layout_marginTop="44dp"/>
     <Button
+            android:text="View Water Reports"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/buttonview"
+            android:layout_marginTop="11dp" android:layout_below="@+id/quality_report"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"/>
+    <Button
             android:text="View Map"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/viewmapbutton"
-            android:layout_marginTop="31dp"
+            android:layout_marginTop="55dp"
             android:layout_below="@+id/buttonview"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"/>
     <Button
-            android:text="View Reports"
+            android:text="View Quality Reports"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/buttonview"
-            android:layout_marginTop="11dp" android:layout_below="@+id/quality_report"
-            android:layout_alignParentRight="true"
+            android:layout_below="@+id/buttonview"
+            android:id="@+id/quality_report_view" android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"/>

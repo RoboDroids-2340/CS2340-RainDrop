@@ -55,6 +55,8 @@
                 android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".CreateQualityReportActivity">
         </activity>
+        <activity android:name=".ViewQualityReports">
+        </activity>
     </application>
 
 </manifest>
