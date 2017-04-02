@@ -25,6 +25,7 @@ import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.helper.DateAsXAxisLabelFormatter;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
+import com.jjoe64.graphview.series.PointsGraphSeries;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -66,8 +67,10 @@ public class ViewHistoricalReports extends AppCompatActivity {
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     final Spinner locationSpinner = (Spinner) findViewById(R.id.location_spinner);
                     GraphView graph = (GraphView) findViewById(R.id.graph);
+                    graph.removeAllSeries();
                     DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss.SSS");
-                    int i = 0;
+                    double[] monthTotal = new double[12];
+                    int[] monthCounter = new int[12];
                     for (DataSnapshot snapshot : dataSnapshot.child("quality_reports").getChildren()) {
                         QualityReportModel qualityReport = snapshot.getValue(QualityReportModel.class);
                         if (qualityReport != null) {
@@ -78,16 +81,30 @@ public class ViewHistoricalReports extends AppCompatActivity {
                             String coord = "Lat: " + Double.toString(qualityReport.getLat());
                             coord +=  " Lon: " + Double.toString(qualityReport.getLon());
                             if (diff == 0 && locationSpinner.getSelectedItem().toString().equals(coord)) {
-                                pointList.add(new DataPoint(calendar.getTime(), qualityReport.getContaminantPPM()));
+                                int month = calendar.get(Calendar.MONTH);
+                                monthTotal[month - 1] += getSelectedPPM(qualityReport);
+                                monthCounter[month - 1] += 1;
                             }
                         }
                     }
+                    for (int i = 0; i < monthTotal.length; i++) {
+                        double y = 0;
+                        if (monthCounter[i] != 0) {
+                            y = monthTotal[i] / monthCounter[i];
+                        }
+                        pointList.add(new DataPoint(i + 1, y));
+
+                    }
+
                     DataPoint[] dataPoints = pointList.toArray(new DataPoint[pointList.size()]);
                     LineGraphSeries<DataPoint> series = new LineGraphSeries<>(dataPoints);
                     graph.addSeries(series);
-                    graph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getApplicationContext()));
-                    graph.getGridLabelRenderer().setNumHorizontalLabels(pointList.size()); // only 4 because of the space
-                    graph.getGridLabelRenderer().setHumanRounding(false);
+                    graph.setTitle("History Report for " + yearString.getText());
+                    graph.getGridLabelRenderer().setVerticalAxisTitle(getSelectedPPMString());
+                    graph.getGridLabelRenderer().setHorizontalAxisTitle("Month");
+                    graph.getGridLabelRenderer().setNumHorizontalLabels(12); // only 4 because of the space
+                    graph.getGridLabelRenderer().setPadding(1);
+                    //series.setShape(PointsGraphSeries.Shape.POINT);
                     mDatabase.removeEventListener(this);
                 }
 
@@ -97,6 +114,22 @@ public class ViewHistoricalReports extends AppCompatActivity {
             mDatabase.addValueEventListener(usersListener);
         }
 
+    }
+
+    private double getSelectedPPM(QualityReportModel qualityReport) {
+        Spinner dataSpinner = (Spinner) findViewById(R.id.data_spinner);
+        if (dataSpinner.getSelectedItem().toString().equals("Virus")) {
+            return qualityReport.getVirusPPM();
+        }
+        return qualityReport.getContaminantPPM();
+    }
+
+    private String getSelectedPPMString() {
+        Spinner dataSpinner = (Spinner) findViewById(R.id.data_spinner);
+        if (dataSpinner.getSelectedItem().toString().equals("Virus")) {
+            return "Virus PPM";
+        }
+        return "Contaminent PPM";
     }
 
     private String yearFromDate(String dateString) {
@@ -113,7 +146,12 @@ public class ViewHistoricalReports extends AppCompatActivity {
     private void populateSpinner() {
         final Spinner locationSpinner = (Spinner) findViewById(R.id.location_spinner);
         final List<String> spinnerArray =  new ArrayList<String>();
-
+        final Spinner dataSpinner = (Spinner) findViewById(R.id.data_spinner);
+        ArrayAdapter<String>  dataAdapter = new ArrayAdapter<>(
+                getApplicationContext(),
+                android.R.layout.simple_spinner_item, new String[] {"Contaminent", "Virus"}
+        );
+        dataSpinner.setAdapter(dataAdapter);
         final DatabaseReference mDatabase;
         mDatabase = FirebaseDatabase.getInstance().getReference();
         ValueEventListener usersListener = new ValueEventListener() {
@@ -143,15 +181,6 @@ public class ViewHistoricalReports extends AppCompatActivity {
             public void onCancelled(DatabaseError databaseError) {}
         };
         mDatabase.addValueEventListener(usersListener);
-    }
-    private void generate_graph() {
-        GraphView graph = (GraphView) findViewById(R.id.graph);
-        LineGraphSeries<DataPoint> series = new LineGraphSeries<>(new DataPoint[] {
-                new DataPoint(0, 1),
-                new DataPoint(1, 5),
-                new DataPoint(2, 3)
-        });
-        graph.addSeries(series);
     }
 
 }
