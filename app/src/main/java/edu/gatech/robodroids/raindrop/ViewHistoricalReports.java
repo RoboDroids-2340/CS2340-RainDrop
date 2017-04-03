@@ -53,6 +53,9 @@ public class ViewHistoricalReports extends AppCompatActivity {
         populateSpinner();
     }
 
+    /**
+     * Generates historical report graph.
+     */
     private void generate() {
         final List<DataPoint> pointList = new ArrayList<>();
         final TextView yearString = (TextView) findViewById(R.id.year);
@@ -116,6 +119,11 @@ public class ViewHistoricalReports extends AppCompatActivity {
 
     }
 
+    /**
+     * Get's the virus or contaminant PPM based on whichever is selected.
+     * @param qualityReport The quality report the PPM is coming from.
+     * @return The PPM.
+     */
     private double getSelectedPPM(QualityReportModel qualityReport) {
         Spinner dataSpinner = (Spinner) findViewById(R.id.data_spinner);
         if (dataSpinner.getSelectedItem().toString().equals("Virus")) {
@@ -124,6 +132,10 @@ public class ViewHistoricalReports extends AppCompatActivity {
         return qualityReport.getContaminantPPM();
     }
 
+    /**
+     * Returns virus or contaminant PPM as a string.
+     * @return PPM as a string.
+     */
     private String getSelectedPPMString() {
         Spinner dataSpinner = (Spinner) findViewById(R.id.data_spinner);
         if (dataSpinner.getSelectedItem().toString().equals("Virus")) {
@@ -132,6 +144,11 @@ public class ViewHistoricalReports extends AppCompatActivity {
         return "Contaminent PPM";
     }
 
+    /**
+     * Takes the date string and returns the year.
+     * @param dateString Date of report.
+     * @return Year of report.
+     */
     private String yearFromDate(String dateString) {
         String stringYear = "";
         for (int i = 0; dateString.charAt(i) != ' '; i++) {
@@ -143,6 +160,10 @@ public class ViewHistoricalReports extends AppCompatActivity {
         }
         return stringYear;
     }
+
+    /**
+     * Spinners for location selection and PPM selector.
+     */
     private void populateSpinner() {
         final Spinner locationSpinner = (Spinner) findViewById(R.id.location_spinner);
         final List<String> spinnerArray =  new ArrayList<String>();
