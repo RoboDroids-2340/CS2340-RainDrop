@@ -57,6 +57,13 @@ public class activity_application_main extends AppCompatActivity {
                 viewQualityReports();
             }
         });
+        final Button historical_report_view = (Button) findViewById(R.id.historical_report_view);
+        historical_report_view.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                viewHistoricalReports();
+            }
+        });
+
         user = getIntent().getParcelableExtra("user");
     }
 
@@ -122,12 +129,28 @@ public class activity_application_main extends AppCompatActivity {
      * Opens quality report viewer activity.
      */
     private void viewQualityReports() {
+        Toast.makeText(getApplicationContext(), "1", Toast.LENGTH_LONG );
         if (!user.type.equals("Manager")) {
             Toast.makeText(getApplicationContext(),
                     "You do not have the proper access level for that!",
                     Toast.LENGTH_SHORT).show();
         } else {
             Intent intent = new Intent(this, ViewQualityReports.class);
+            startActivity(intent);
+        }
+        Toast.makeText(getApplicationContext(), "1", Toast.LENGTH_LONG );
+    }
+
+    /**
+     * Opens historical report viewer activity.
+     */
+    private void viewHistoricalReports() {
+        if (!user.type.equals("Manager")) {
+            Toast.makeText(getApplicationContext(),
+                    "You do not have the proper access level for that!",
+                    Toast.LENGTH_SHORT).show();
+        } else {
+            Intent intent = new Intent(this, ViewHistoricalReports.class);
             startActivity(intent);
         }
     }
