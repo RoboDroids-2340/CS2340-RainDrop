@@ -60,7 +60,7 @@ public class ViewHistoricalReports extends AppCompatActivity {
         final List<DataPoint> pointList = new ArrayList<>();
         final TextView yearString = (TextView) findViewById(R.id.year);
         if (yearString.getText() == null) {
-        //TODO TOAST
+            //TODO TOAST
             int x = 0;
         } else {
             final DatabaseReference mDatabase;
@@ -149,7 +149,7 @@ public class ViewHistoricalReports extends AppCompatActivity {
      * @param dateString Date of report.
      * @return Year of report.
      */
-    private String yearFromDate(String dateString) {
+    static String yearFromDate(String dateString) {
         String stringYear = "";
         for (int i = 0; dateString.charAt(i) != ' '; i++) {
             if (dateString.charAt(i) == '/') {
