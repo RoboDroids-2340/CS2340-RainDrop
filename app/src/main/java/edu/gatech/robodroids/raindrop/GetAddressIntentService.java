@@ -11,6 +11,7 @@ import android.text.TextUtils;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
 
@@ -19,8 +20,11 @@ import java.util.Locale;
  */
 public class GetAddressIntentService extends IntentService {
 
-    protected ResultReceiver mReceiver;
+    private ResultReceiver mReceiver;
 
+    /**
+     * No Arg constructor
+     */
     public GetAddressIntentService() {
         super("GetAddressIntentService");
     }
@@ -41,14 +45,14 @@ public class GetAddressIntentService extends IntentService {
             errorMsg = "Invalid latitude and longitude.";
         }
 
-        if (addresses == null || addresses.size() == 0) {
+        if ((addresses == null) || (addresses.isEmpty())) {
             if (errorMsg.isEmpty()) {
                 errorMsg = "No address found";
             }
             deliverResultToReciever(0, errorMsg);
         } else {
             Address mAddress = addresses.get(0);
-            ArrayList<String> addressFragments = new ArrayList<>();
+            Collection<String> addressFragments = new ArrayList<>();
             for(int i = 0; i < mAddress.getMaxAddressLineIndex(); i++) {
                 addressFragments.add(mAddress.getAddressLine(i));
             }
@@ -58,7 +62,7 @@ public class GetAddressIntentService extends IntentService {
     }
 
     /**
-     * Delievers results to the receiver in create report activity.
+     * Delivers results to the receiver in create report activity.
      * @param resultCode Result of success or not.
      * @param msg Error or success message.
      */

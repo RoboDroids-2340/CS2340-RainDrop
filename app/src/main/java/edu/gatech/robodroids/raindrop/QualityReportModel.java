@@ -3,16 +3,16 @@ package edu.gatech.robodroids.raindrop;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Locale;
 
 /**
  * Quality Report Class
  * Created by jviszlai on 3/25/17.
  */
-public class QualityReportModel {
+class QualityReportModel {
 
     private String submissionTime;
     private int reportNumber;
-    //TODO Change numOfReports to a database reference.
     private static int numOfReports;
     private double lat;
     private double lon;
@@ -31,7 +31,8 @@ public class QualityReportModel {
      * @param name name of who created report
      * @param subTime submission time
      */
-    public QualityReportModel(double lat, double lon, String condition, double virusPPM, double contaminantPPM, String name, String subTime) {
+    public QualityReportModel(double lat, double lon, String condition, double virusPPM,
+                                double contaminantPPM, String name, String subTime) {
         submissionTime = subTime;
         this.lat = lat;
         this.lon = lon;
@@ -101,14 +102,15 @@ public class QualityReportModel {
      * @return Quality Report info.
      */
     public String toString() {
-        DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss.SSS");
+        DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss.SSS", Locale.US);
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(Long.parseLong(submissionTime));
         String actualDate = formatter.format(calendar.getTime());
-        return String.format(
+        return String.format(Locale.ENGLISH,
                 "Created by: %s. Latitude: %f. Longitude: %f. Condition: %s. "
                 + "VirusPPM: %f. ContaminantPPM: %f. Date Received: %s. Report Number: %d",
-                reporterName, lat, lon, waterCondition, virusPPM, contaminantPPM, actualDate, reportNumber);
+                reporterName, lat, lon, waterCondition, virusPPM, contaminantPPM,
+                                                actualDate, reportNumber);
     }
 
     /**

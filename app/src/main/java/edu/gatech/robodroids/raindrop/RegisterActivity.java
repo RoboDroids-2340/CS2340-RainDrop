@@ -22,6 +22,7 @@ public class RegisterActivity extends AppCompatActivity  {
         setContentView(R.layout.activity_register);
         final Button registerButton = (Button) findViewById(R.id.email_register_button);
         registerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 registerUser();
             }
@@ -41,8 +42,8 @@ public class RegisterActivity extends AppCompatActivity  {
                 password.getText().toString(),
                 userTypeSpinner.getSelectedItem().toString());
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-        //TODO allow for attempted duplicates
-        mDatabase.child("users").child(id.getText().toString().replaceAll("\\.", ",")).setValue(user);
+        mDatabase.child("users").child(id.getText().toString().replaceAll("\\.", ","))
+                                                    .setValue(user);
         Intent intent = new Intent(this, WelcomeActivity.class);
         startActivity(intent);
 
