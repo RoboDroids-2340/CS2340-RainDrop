@@ -3,16 +3,16 @@ package edu.gatech.robodroids.raindrop;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
+import java.util.Locale;
+
 /**
  * Water Report Class
  * Created by jviszlai on 3/2/17.
  */
-public class WaterReportModel {
+class WaterReportModel {
 
     private String submissionTime;
     private int reportNumber;
-    //TODO Change numOfReports to a database reference.
     private static int numOfReports;
     private double lat;
     private double lon;
@@ -28,7 +28,8 @@ public class WaterReportModel {
      * @param condition condition of water source.
      * @param name name of who created report
      */
-    public WaterReportModel(double lat, double lon, String type, String condition, String name, String subTime) {
+    public WaterReportModel(double lat, double lon, String type, String condition
+                            ,String name, String subTime) {
         submissionTime = subTime;
         this.lat = lat;
         this.lon = lon;
@@ -89,12 +90,13 @@ public class WaterReportModel {
      * @return Water Report info.
      */
     public String toString() {
-        DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss.SSS");
+        DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss.SSS", Locale.US);
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(Long.parseLong(submissionTime));
         String actualDate = formatter.format(calendar.getTime());
-        return String.format(
-                "Created by: %s. Latitude: %f. Longitude: %f. Type: %s. Condition: %s. Date Received: %s. Report Number: %d",
+        return String.format(Locale.ENGLISH,
+                "Created by: %s. Latitude: %f. Longitude: %f. Type: %s. " +
+                        "Condition: %s. Date Received: %s. Report Number: %d",
                 reporterName, lat, lon, waterType, waterCondition, actualDate, reportNumber);
     }
 

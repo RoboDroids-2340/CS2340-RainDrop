@@ -4,9 +4,8 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 /**
- * Created by sc on 2/19/17.
+ * Created By: RoboDroids
  */
-
 public class UserModel implements Parcelable {
     public String name;
     public String userid;
@@ -74,11 +73,12 @@ public class UserModel implements Parcelable {
     /**
      * Creator needed to regenerate a user object.
      */
-    public static final Parcelable.Creator<UserModel> CREATOR = new Parcelable.Creator<UserModel>() {
+    public static final Parcelable.Creator<UserModel> CREATOR = new Parcelable.Creator<UserModel>(){
+        @Override
         public UserModel createFromParcel(Parcel in) {
             return new UserModel(in);
         }
-
+        @Override
         public UserModel[] newArray(int size) {
             return new UserModel[size];
         }

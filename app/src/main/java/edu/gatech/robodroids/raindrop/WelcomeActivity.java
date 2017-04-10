@@ -22,6 +22,7 @@ public class WelcomeActivity extends AppCompatActivity {
 
         final Button registerButton = (Button) findViewById(R.id.button);
         registerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 register();
             }
@@ -29,6 +30,7 @@ public class WelcomeActivity extends AppCompatActivity {
 
         final Button loginButton = (Button) findViewById(R.id.email_sign_in_button);
         loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 login();
             }
