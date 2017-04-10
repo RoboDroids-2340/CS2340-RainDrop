@@ -114,7 +114,7 @@ public class activity_application_main extends AppCompatActivity {
      * Opens quality report creator activity, only if user has proper access level.
      */
     private void createQualityReport() {
-        if (user.type.equals("User")) {
+        if (checkAccessLevel(user, "User")) {
             Toast.makeText(getApplicationContext(),
                     "You do not have the proper access level for that!",
                     Toast.LENGTH_SHORT).show();
@@ -130,7 +130,7 @@ public class activity_application_main extends AppCompatActivity {
      */
     private void viewQualityReports() {
         Toast.makeText(getApplicationContext(), "1", Toast.LENGTH_LONG );
-        if (!user.type.equals("Manager")) {
+        if (!checkAccessLevel(user, "Manager")) {
             Toast.makeText(getApplicationContext(),
                     "You do not have the proper access level for that!",
                     Toast.LENGTH_SHORT).show();
@@ -145,7 +145,7 @@ public class activity_application_main extends AppCompatActivity {
      * Opens historical report viewer activity.
      */
     private void viewHistoricalReports() {
-        if (!user.type.equals("Manager")) {
+        if (!checkAccessLevel(user, "Manager")) {
             Toast.makeText(getApplicationContext(),
                     "You do not have the proper access level for that!",
                     Toast.LENGTH_SHORT).show();
@@ -153,5 +153,19 @@ public class activity_application_main extends AppCompatActivity {
             Intent intent = new Intent(this, ViewHistoricalReports.class);
             startActivity(intent);
         }
+    }
+
+    /**
+     * Access level helper method
+     */
+    private boolean checkAccessLevel(UserModel user, String level) {
+        if (user == null || level == null) {
+            throw new IllegalArgumentException("Neither user or level arguments can be null");
+        }
+
+        if (user.type.equals(level)) {
+            return true;
+        }
+        return false;
     }
 }
