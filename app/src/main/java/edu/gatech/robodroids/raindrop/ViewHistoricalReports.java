@@ -51,6 +51,7 @@ public class ViewHistoricalReports extends AppCompatActivity {
         final List<DataPoint> pointList = new ArrayList<>();
         final TextView yearString = (TextView) findViewById(R.id.year);
         if (yearString.getText() != null) {
+
             final DatabaseReference mDatabase;
             mDatabase = FirebaseDatabase.getInstance().getReference();
             ValueEventListener usersListener = new ValueEventListener() {
@@ -149,7 +150,7 @@ public class ViewHistoricalReports extends AppCompatActivity {
      * @param dateString Date of report.
      * @return Year of report.
      */
-    private String yearFromDate(CharSequence dateString) {
+    static String yearFromDate(String dateString) {
         String stringYear = "";
         for (int i = 0; dateString.charAt(i) != ' '; i++) {
             if (dateString.charAt(i) == '/') {
