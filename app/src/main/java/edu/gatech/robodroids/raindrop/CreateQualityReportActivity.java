@@ -60,21 +60,21 @@ public class CreateQualityReportActivity extends AppCompatActivity {
      * Creates a new quality report.
      */
     private void submit() {
-        try {
-            if (conditionSpinner.getSelectedItem() == null) {
-                throw new Exception();
-            }
-            QualityReportModel report = new QualityReportModel(
-                    Double.parseDouble(mLat.getText().toString()),
-                    Double.parseDouble(mLon.getText().toString()),
-                    conditionSpinner.getSelectedItem().toString(),
-                    Double.parseDouble(virusPPM.getText().toString()),
-                    Double.parseDouble(contaminantPPM.getText().toString()),
-                    user.name,
-                    System.currentTimeMillis()+"");
-
+        QualityReportModel report = ValidateQualityInput.inputToQualityReport(
+                mLat.getText().toString(),
+                mLon.getText().toString(),
+                conditionSpinner.getSelectedItem(),
+                virusPPM.getText().toString(),
+                contaminantPPM.getText().toString(),
+                user.name,
+                System.currentTimeMillis()+"");
+        if (report == null) {
+            Toast.makeText(getApplicationContext(),
+                    "You didn't fill out the report correctly!",
+                    Toast.LENGTH_LONG).show();
+        } else {
             DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-            mDatabase.child("quality_reports").child(report.getReportNumber()+"").setValue(report);
+            mDatabase.child("quality_reports").child(report.getReportNumber() + "").setValue(report);
             Toast.makeText(getApplicationContext(),
                     "Successfully created a report with report number: " + report.getReportNumber(),
                     Toast.LENGTH_LONG).show();
@@ -82,14 +82,8 @@ public class CreateQualityReportActivity extends AppCompatActivity {
             intent.putExtra("user", user);
             intent.putExtra("userid", user.userid);
             startActivity(intent);
-        } catch(NumberFormatException e) {
-            Toast.makeText(getApplicationContext(),
-                    "You didn't fill out the report correctly!",
-                    Toast.LENGTH_LONG).show();
-        } catch(Exception e) {
-            Toast.makeText(getApplicationContext(),
-                    "You need to finish filling out the report!",
-                    Toast.LENGTH_LONG).show();
         }
     }
+
+
 }
