@@ -91,7 +91,7 @@ public class activity_application_main extends AppCompatActivity {
      */
     private void edit() {
         Intent intent = new Intent(this, EditActivity.class);
-        intent.putExtra("userId", user.userid);
+        intent.putExtra("userId", user.getUserid());
         startActivity(intent);
     }
 
@@ -166,15 +166,16 @@ public class activity_application_main extends AppCompatActivity {
 
     /**
      * Access level helper method
+     *
+     * @param user the user
+     * @param level the level to check
+     * @return boolean indicating user type equals level
      */
     public static boolean checkAccessLevel(UserModel user, String level) {
-        if (user == null || level == null) {
+        if ((user == null) || (level == null)) {
             throw new IllegalArgumentException("Neither user or level arguments can be null");
         }
 
-        if (user.type.equals(level)) {
-            return true;
-        }
-        return false;
+        return user.getType().equals(level);
     }
 }

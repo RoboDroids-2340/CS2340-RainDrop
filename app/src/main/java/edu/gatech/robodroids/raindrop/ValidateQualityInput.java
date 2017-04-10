@@ -1,7 +1,7 @@
 package edu.gatech.robodroids.raindrop;
 
 /**
- * Created by jviszlai on 4/9/17.
+ * Created by jviszlai.
  */
 public class ValidateQualityInput {
 
@@ -24,9 +24,9 @@ public class ValidateQualityInput {
             String contaminantPPM, String name, String time) {
         try {
             if (selectedCondition == null) {
-                throw new NullPointerException();
+                return null;
             }
-            QualityReportModel report = new QualityReportModel(
+            return new QualityReportModel(
                     Double.parseDouble(mLat),
                     Double.parseDouble(mLon),
                     selectedCondition.toString(),
@@ -34,10 +34,7 @@ public class ValidateQualityInput {
                     Double.parseDouble(contaminantPPM),
                     name,
                     time);
-            return report;
         } catch(NumberFormatException e) {
-            return null;
-        } catch(NullPointerException e) {
             return null;
         }
 

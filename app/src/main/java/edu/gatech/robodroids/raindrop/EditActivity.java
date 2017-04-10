@@ -53,9 +53,9 @@ public class EditActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 UserModel user = dataSnapshot.child("users").child(
                         userid).getValue(UserModel.class);
-                String nameString = "Name: " + user.name;
-                String emailString = "Email: " + user.userid;
-                String passwordString = "Password: " + user.pass;
+                String nameString = "Name: " + user.getName();
+                String emailString = "Email: " + user.getUserid();
+                String passwordString = "Password: " + user.getPass();
 
                 nameText.setText(nameString);
                 emailText.setText(emailString);

@@ -40,7 +40,7 @@ public class RegisterActivity extends AppCompatActivity  {
         UserModel user = UserBuilder.buildUser(name.getText().toString(), id.getText().toString(),
                 password.getText().toString(), userTypeSpinner.getSelectedItem().toString());
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-        mDatabase.child("users").child(user.userid).setValue(user);
+        mDatabase.child("users").child(user.getUserid()).setValue(user);
         Intent intent = new Intent(this, WelcomeActivity.class);
         startActivity(intent);
 

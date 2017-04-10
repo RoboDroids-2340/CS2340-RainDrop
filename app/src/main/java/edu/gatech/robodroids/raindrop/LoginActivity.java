@@ -65,10 +65,10 @@ public class LoginActivity extends AppCompatActivity  {
                 UserModel user = dataSnapshot.child("users").child(
                         username.getText().toString().replaceAll("\\.", ","))
                                                     .getValue(UserModel.class);
-                if ((user != null) && (user.pass.equals(password.getText().toString()))) {
+                if ((user != null) && (user.getPass().equals(password.getText().toString()))) {
                     Intent intent = new Intent(ctx, activity_application_main.class);
                     intent.putExtra("user", user);
-                    intent.putExtra("userid", user.userid);
+                    intent.putExtra("userid", user.getUserid());
                     startActivity(intent);
                 } else {
                     Toast.makeText(ctx, "Invalid login!", Toast.LENGTH_SHORT).show();

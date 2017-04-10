@@ -66,7 +66,7 @@ public class CreateQualityReportActivity extends AppCompatActivity {
                 conditionSpinner.getSelectedItem(),
                 virusPPM.getText().toString(),
                 contaminantPPM.getText().toString(),
-                user.name,
+                user.getName(),
                 System.currentTimeMillis()+"");
         if (report == null) {
             Toast.makeText(getApplicationContext(),
@@ -74,13 +74,14 @@ public class CreateQualityReportActivity extends AppCompatActivity {
                     Toast.LENGTH_LONG).show();
         } else {
             DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-            mDatabase.child("quality_reports").child(report.getReportNumber() + "").setValue(report);
+            mDatabase.child("quality_reports").child(report.getReportNumber() +
+                                        "").setValue(report);
             Toast.makeText(getApplicationContext(),
                     "Successfully created a report with report number: " + report.getReportNumber(),
                     Toast.LENGTH_LONG).show();
             Intent intent = new Intent(this, activity_application_main.class);
             intent.putExtra("user", user);
-            intent.putExtra("userid", user.userid);
+            intent.putExtra("userid", user.getUserid());
             startActivity(intent);
         }
     }

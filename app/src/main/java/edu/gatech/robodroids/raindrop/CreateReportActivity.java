@@ -107,7 +107,7 @@ public class CreateReportActivity extends AppCompatActivity implements
                     Double.parseDouble(mLon.getText().toString()),
                     typeSpinner.getSelectedItem().toString(),
                     conditionSpinner.getSelectedItem().toString(),
-                    user.name,
+                    user.getName(),
                     System.currentTimeMillis()+"");
 
             DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
@@ -117,7 +117,7 @@ public class CreateReportActivity extends AppCompatActivity implements
                     Toast.LENGTH_LONG).show();
             Intent intent = new Intent(this, activity_application_main.class);
             intent.putExtra("user", user);
-            intent.putExtra("userid", user.userid);
+            intent.putExtra("userid", user.getUserid());
             startActivity(intent);
         } else {
             Toast.makeText(getApplicationContext(),

@@ -19,12 +19,8 @@ import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 import com.jjoe64.graphview.series.Series;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
-import java.util.Locale;
 /**
  * Created By: RoboDroids
  */
@@ -68,9 +64,11 @@ public class ViewHistoricalReports extends AppCompatActivity {
                         if (qualityReport != null) {
                             String query = locationSpinner.getSelectedItem()
                                     .toString();
-                            GraphAssistant assistant = new GraphAssistant(getSelectedPPM(qualityReport));
+                            GraphAssistant assistant = new GraphAssistant(
+                                                            getSelectedPPM(qualityReport));
 
-                            assistant.updateTotalAndCounter(qualityReport, monthTotal, monthCounter, query,
+                            assistant.updateTotalAndCounter(qualityReport, monthTotal,
+                                    monthCounter, query,
                                     yearString.getText().toString());
                         }
                     }

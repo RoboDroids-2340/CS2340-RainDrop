@@ -19,10 +19,10 @@ public class UserBuilderUnitTest {
         UserModel correct =
                 new UserModel(username, "testusername@gatech,edu", hashedPass, userType);
         UserModel built = UserBuilder.buildUser(username, userid, pass, userType);
-        assertEquals(correct.userid, built.userid);
-        assertEquals(correct.name, built.name);
-        assertEquals(correct.pass, built.pass);
-        assertEquals(correct.type, built.type);
+        assertEquals(correct.getUserid(), built.getUserid());
+        assertEquals(correct.getName(), built.getName());
+        assertEquals(correct.getPass(), built.getPass());
+        assertEquals(correct.getType(), built.getType());
     }
 
 }

@@ -6,12 +6,16 @@ import java.util.Calendar;
 import java.util.Locale;
 
 /**
- * Created by jjacob on 4/9/17.
+ * Created by: RoboDroids.
  */
 
 public class GraphAssistant {
-    private double ppm;
+    private final double ppm;
 
+    /**
+     *
+     * @param ppm target ppm
+     */
     public GraphAssistant(double ppm) {
         this.ppm = ppm;
     }
