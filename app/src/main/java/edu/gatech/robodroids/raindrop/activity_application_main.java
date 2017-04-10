@@ -158,7 +158,7 @@ public class activity_application_main extends AppCompatActivity {
     /**
      * Access level helper method
      */
-    private boolean checkAccessLevel(UserModel user, String level) {
+    public static boolean checkAccessLevel(UserModel user, String level) {
         if (user == null || level == null) {
             throw new IllegalArgumentException("Neither user or level arguments can be null");
         }
