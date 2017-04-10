@@ -4,19 +4,9 @@
     <!-- Strings related to login -->
     <string name="prompt_email">Email ID</string>
     <string name="prompt_password">Password</string>
-    <string name="action_sign_in">Sign in or register</string>
     <string name="action_sign_in_short">Sign in</string>
-    <string name="error_invalid_email">This email address is invalid</string>
-    <string name="error_invalid_password">This password is too short</string>
-    <string name="error_incorrect_password">This password is incorrect</string>
-    <string name="error_field_required">This field is required</string>
-    <string name="permission_rationale">"Contacts permissions are needed for
-        providing email
-        completions."
-    </string>
     <string name="title_activity_login">Sign in</string>
     <string name="title_activity_register">Register</string>
-    <string name="user_type_label">User type</string>
     <string-array name="user_type_selector">
         <item>User</item>
         <item>Worker</item>
@@ -25,4 +15,32 @@
     </string-array>
     <string name="title_activity_view_water_reports">ViewWaterReports</string>
     <string name="title_activity_view_map">ViewMap</string>
+    <string name="welcome_message">Welcome to the RainDrop!</string>
+    <string name="edit_message">Edit Profile</string>
+    <string name="create_water_report">Create Water Report</string>
+    <string name="create_quality_report">Create Quality Report</string>
+    <string name="logout_message">Logout</string>
+    <string name="view_water_reports">View Water Reports</string>
+    <string name="view_maps">View Maps</string>
+    <string name="view_historical">View Historical Report</string>
+    <string name="view_quality_reports">View Quality Reports</string>
+    <string name="water_condition">Water Condition</string>
+    <string name="submit_report">Submit Report</string>
+    <string name="virus_ppm">Virus PPM</string>
+    <string name="longitude">Longtitude</string>
+    <string name="latitude">Latitude</string>
+    <string name="contaminant_ppm">Contaminant PPM</string>
+    <string name="water_type">Water Type</string>
+    <string name="current_name">Current Name</string>
+    <string name="permanent_email">Permanent Email</string>
+    <string name="current_password">Current Password</string>
+    <string name="new_name">New Name</string>
+    <string name="new_password">New Name</string>
+    <string name="confirm">Confirm</string>
+    <string name="cancel">Cancel</string>
+    <string name="name">Name</string>
+    <string name="register">Register</string>
+    <string name="year">Year</string>
+    <string name="generate_graph">Generate Graph</string>
+
 </resources>

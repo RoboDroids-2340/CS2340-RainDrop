@@ -12,17 +12,16 @@
     tools:context="edu.gatech.robodroids.raindrop.CreateQualityReportActivity">
 
     <TextView
-            android:text="Create Quality Report"
+            android:text="@string/create_quality_report"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true" android:id="@+id/quality_title"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"/>
     <TextView
-            android:text="Water Condition"
+            android:text="@string/water_condition"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/type_spinner"
             android:layout_marginTop="47dp" android:id="@+id/water_condition"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textAlignment="center"
@@ -46,10 +45,10 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="10dp" android:id="@+id/submit_report"
-            android:text="Submit Report"/>
+            android:text="@string/submit_report"/>
 
     <TextView
-            android:text="Virus PPM"
+            android:text="@string/virus_ppm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/condition_spinner"
@@ -71,13 +70,12 @@
             android:inputType="textPersonName"
             android:ems="10"
             android:id="@+id/lon"
-            android:numeric="decimal"
             android:layout_above="@+id/submit_report"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="15dp"
             android:textAlignment="center"/>
     <TextView
-            android:text="Your Longitude"
+            android:text="@string/longitude"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/textView3"
@@ -94,14 +92,13 @@
             android:id="@+id/lat"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:numeric="decimal"
             android:layout_above="@+id/textView3"
             android:layout_alignLeft="@+id/lon"
             android:layout_alignStart="@+id/lon"
             android:layout_alignRight="@+id/lon"
             android:layout_alignEnd="@+id/lon"/>
     <TextView
-            android:text="Your Latitude"
+            android:text="@string/latitude"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/your_location"
@@ -110,7 +107,7 @@
             android:layout_above="@+id/lat"
             android:layout_centerHorizontal="true"/>
     <TextView
-            android:text="Contaminant PPM"
+            android:text="@string/contaminant_ppm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/virus_ppm"

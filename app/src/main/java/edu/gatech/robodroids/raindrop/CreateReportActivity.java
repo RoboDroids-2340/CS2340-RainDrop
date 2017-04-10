@@ -5,6 +5,7 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Handler;
 import android.os.ResultReceiver;
+import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -23,8 +24,12 @@ import com.google.android.gms.location.LocationServices;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+/**
+ * Created By: RoboDroids
+ */
 public class CreateReportActivity extends AppCompatActivity implements
-        GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
+        GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener,
+                                            LocationListener {
 
     private UserModel user;
     private GoogleApiClient mGoogleApiClient;
@@ -47,12 +52,6 @@ public class CreateReportActivity extends AppCompatActivity implements
 
         @Override
         protected void onReceiveResult(int resultCode, Bundle resultData) {
-            /**if (resultCode == 1) {
-                mAddress.setText(resultData.getString("result"));
-            } else {
-                mAddress.setText("No address found.");
-                Log.d("AddressError: ", resultData.getString("msg"));
-            }**/
         }
     }
 
@@ -65,14 +64,15 @@ public class CreateReportActivity extends AppCompatActivity implements
         typeSpinner = (Spinner) findViewById(R.id.type_spinner);
         String[] waterTypes = new String[]{"Bottled", "Well", "Stream", "Lake", "Spring", "Other"};
         ArrayAdapter<String> typeAdapter =
-                new ArrayAdapter(this,android.R.layout.simple_spinner_item, waterTypes);
+                new ArrayAdapter<>(this,android.R.layout.simple_spinner_item, waterTypes);
         typeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         typeSpinner.setAdapter(typeAdapter);
 
         conditionSpinner = (Spinner) findViewById(R.id.condition_spinner);
-        String[] waterConditions = new String[]{"Waste", "Treatable-Clear", "Treatable-Muddy", "Potable"};
+        String[] waterConditions = new String[]{"Waste", "Treatable-Clear", "Treatable-Muddy",
+                "Potable"};
         ArrayAdapter<String> conditionAdapter =
-                new ArrayAdapter(this,android.R.layout.simple_spinner_item, waterConditions);
+                new ArrayAdapter<>(this,android.R.layout.simple_spinner_item, waterConditions);
         conditionAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         conditionSpinner.setAdapter(conditionAdapter);
 
@@ -100,7 +100,8 @@ public class CreateReportActivity extends AppCompatActivity implements
      * Creates a new water report.
      */
     private void submit() {
-        if (typeSpinner.getSelectedItem() != null && conditionSpinner.getSelectedItem() != null) {
+        if ((typeSpinner.getSelectedItem() != null)
+                                && (conditionSpinner.getSelectedItem() != null)) {
             WaterReportModel report = new WaterReportModel(
                     Double.parseDouble(mLat.getText().toString()),
                     Double.parseDouble(mLon.getText().toString()),
@@ -108,7 +109,6 @@ public class CreateReportActivity extends AppCompatActivity implements
                     conditionSpinner.getSelectedItem().toString(),
                     user.name,
                     System.currentTimeMillis()+"");
-                    //TODO the time is a dirty hack
 
             DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
             mDatabase.child("water_reports").child(report.getReportNumber()+"").setValue(report);
@@ -146,8 +146,6 @@ public class CreateReportActivity extends AppCompatActivity implements
                 == PackageManager.PERMISSION_GRANTED) {
             LocationServices.FusedLocationApi.requestLocationUpdates(
                     mGoogleApiClient, mLocationRequest, this);
-        } else {
-            //mAddress.setText("Location permissions not enabled");
         }
     }
 
@@ -168,14 +166,14 @@ public class CreateReportActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onConnectionFailed(ConnectionResult result) {
+    public void onConnectionFailed(@NonNull ConnectionResult result) {
         Log.d("Location Service", "Failed connection.");
     }
 
     /**
      * Starts the location to address service.
      */
-    protected void startIntentService() {
+    private void startIntentService() {
         Intent intent = new Intent(this, GetAddressIntentService.class);
         intent.putExtra("receiver", mReceiver);
         intent.putExtra("location", mLastLocation);
