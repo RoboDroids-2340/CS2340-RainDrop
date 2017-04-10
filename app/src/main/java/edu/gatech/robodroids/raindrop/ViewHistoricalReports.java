@@ -51,7 +51,6 @@ public class ViewHistoricalReports extends AppCompatActivity {
         final List<DataPoint> pointList = new ArrayList<>();
         final TextView yearString = (TextView) findViewById(R.id.year);
         if (yearString.getText() != null) {
-
             final DatabaseReference mDatabase;
             mDatabase = FirebaseDatabase.getInstance().getReference();
             ValueEventListener usersListener = new ValueEventListener() {
@@ -63,13 +62,16 @@ public class ViewHistoricalReports extends AppCompatActivity {
                     double[] monthTotal = new double[MONTHS];
                     int[] monthCounter = new int[MONTHS];
                     for (DataSnapshot snapshot : dataSnapshot.child("quality_reports")
-                                        .getChildren()) {
+                            .getChildren()) {
                         QualityReportModel qualityReport = snapshot.getValue(
-                                                                    QualityReportModel.class);
+                                QualityReportModel.class);
                         if (qualityReport != null) {
                             String query = locationSpinner.getSelectedItem()
                                     .toString();
-                            updateTotalAndCounter(qualityReport, monthTotal, monthCounter, query);
+                            GraphAssistant assistant = new GraphAssistant(getSelectedPPM(qualityReport));
+
+                            assistant.updateTotalAndCounter(qualityReport, monthTotal, monthCounter, query,
+                                    yearString.getText().toString());
                         }
                     }
                     for (int i = 0; i < monthTotal.length; i++) {
@@ -93,25 +95,6 @@ public class ViewHistoricalReports extends AppCompatActivity {
                     mDatabase.removeEventListener(this);
                 }
 
-                private void updateTotalAndCounter(QualityReportModel qualityReport,
-                                                   double[] monthTotal,
-                                                   int[] monthCounter, String query) {
-                    DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss.SSS"
-                            ,Locale.US);
-                    Calendar calendar = Calendar.getInstance();
-                    calendar.setTimeInMillis(Long
-                            .parseLong(qualityReport.getSubmissionTime()));
-                    String actualDate = formatter.format(calendar.getTime());
-                    int diff = Integer.parseInt(yearFromDate(actualDate))
-                            - Integer.parseInt(yearString.getText().toString());
-                    String coord = "Lat: " + Double.toString(qualityReport.getLat());
-                    coord +=  " Lon: " + Double.toString(qualityReport.getLon());
-                    if ((diff == 0) && (query.equals(coord))) {
-                        int month = calendar.get(Calendar.MONTH);
-                        monthTotal[month - 1] += getSelectedPPM(qualityReport);
-                        monthCounter[month - 1] += 1;
-                    }
-                }
                 @Override
                 public void onCancelled(DatabaseError databaseError) {}
             };
@@ -145,22 +128,7 @@ public class ViewHistoricalReports extends AppCompatActivity {
         return "Contaminant PPM";
     }
 
-    /**
-     * Takes the date string and returns the year.
-     * @param dateString Date of report.
-     * @return Year of report.
-     */
-    static String yearFromDate(String dateString) {
-        String stringYear = "";
-        for (int i = 0; dateString.charAt(i) != ' '; i++) {
-            if (dateString.charAt(i) == '/') {
-                stringYear = "";
-            } else {
-                stringYear += dateString.charAt(i);
-            }
-        }
-        return stringYear;
-    }
+
 
     /**
      * Spinners for location selection and PPM selector.
@@ -191,7 +159,7 @@ public class ViewHistoricalReports extends AppCompatActivity {
                 }
                 ArrayAdapter<String> adapter = new ArrayAdapter<>(
                         getApplicationContext(), android.R.layout
-                                                        .simple_spinner_item, spinnerArray);
+                        .simple_spinner_item, spinnerArray);
 
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 locationSpinner.setAdapter(adapter);
