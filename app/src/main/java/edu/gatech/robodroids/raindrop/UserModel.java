@@ -19,6 +19,13 @@ public class UserModel implements Parcelable {
 
     }
 
+    public UserModel(UserModelAssistant assistant) {
+        this.name = assistant.name;
+        this.userid = assistant.userid;
+        this.pass = assistant.pass;
+        this.type = assistant.type;
+    }
+
     /**
      * 4 argument constructor for a user object.
      * @param name the name of the user

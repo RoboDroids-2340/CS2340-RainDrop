@@ -37,8 +37,8 @@ public class RegisterActivity extends AppCompatActivity  {
         TextView password = (TextView) findViewById(R.id.password);
         TextView id = (TextView) findViewById(R.id.userid);
         Spinner userTypeSpinner = (Spinner) findViewById(R.id.user_type_spinner);
-        UserModel user = UserBuilder.buildUser(name.getText().toString(), id.getText().toString(),
-                password.getText().toString(), userTypeSpinner.getSelectedItem().toString());
+        UserModel user = new UserModel(UserBuilder.buildUser(name.getText().toString(), id.getText().toString(),
+                password.getText().toString(), userTypeSpinner.getSelectedItem().toString()));
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
         mDatabase.child("users").child(user.userid).setValue(user);
         Intent intent = new Intent(this, WelcomeActivity.class);

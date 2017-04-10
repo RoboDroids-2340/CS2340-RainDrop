@@ -9,10 +9,17 @@ public class UserBuilder {
 
     }
 
-    public static UserModel buildUser(String username, String id, String password, String userType) {
-        String parsedId = id.replaceAll("\\.", ",");
+    public static UserModelAssistant buildUser(String username, String id, String password,
+                                               String userType) {
+        String parsedId;
+        if (id.contains(".")) {
+            parsedId = id.replaceAll("\\.", ",");
+        } else {
+            parsedId = id;
+        }
+
         String hashedPassword = hash(password);
-        return new UserModel(username, parsedId, hashedPassword, userType);
+        return new UserModelAssistant(username, parsedId, hashedPassword, userType);
     }
 
     public static String hash(String password) {
