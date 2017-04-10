@@ -14,6 +14,7 @@ public class JoshuaViszlaiUnitTest {
                 ValidateQualityInput.inputToQualityReport(
                         "3.3", "3.2", "Treatable",
                 "100.1", "99.9", "Josh", "10371932");
+        Assert.assertNotNull(testReport);
         Assert.assertEquals(testReport.getLat(), 3.3);
         Assert.assertEquals(testReport.getLon(), 3.2);
         Assert.assertEquals(testReport.getWaterCondition(), "Treatable");
