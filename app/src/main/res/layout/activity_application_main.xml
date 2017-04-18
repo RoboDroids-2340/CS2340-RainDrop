@@ -15,7 +15,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/report_button"
-            android:id="@+id/quality_report" android:layout_alignParentRight="true"
+            android:id="@+id/quality_report"
+            android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
@@ -88,6 +89,7 @@
 
     <Button
         android:text="@string/view_historical"
+        android:id="@+id/historical_report_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/view_map_button"
