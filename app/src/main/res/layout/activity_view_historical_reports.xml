@@ -29,14 +29,11 @@
         android:text="@string/generate_graph"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-<<<<<<< Updated upstream
-        android:id="@+id/generate_graph"/>
-=======
         android:layout_below="@+id/location_spinner"
-        android:id="@+id/generate_graph" android:layout_alignParentRight="true"
+        android:id="@+id/generate_graph"
+        android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         style="@android:style/Widget.Material.Button.Colored" />
->>>>>>> Stashed changes
 </LinearLayout>

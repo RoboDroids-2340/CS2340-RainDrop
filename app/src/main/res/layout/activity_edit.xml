@@ -19,37 +19,6 @@
         android:orientation="vertical"
         tools:ignore="UselessParent">
 
-        <TextView
-            android:text="@string/current_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/current_name" />
-
-<<<<<<< Updated upstream
-        <TextView
-            android:text="@string/permanent_email"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/current_email" />
-
-        <TextView
-            android:text="@string/current_password"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/current_password" />
-
-        <AutoCompleteTextView
-            android:id="@+id/name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/new_name"
-            android:inputType="textEmailAddress"
-            android:maxLines="1" />
-
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-=======
             <TextView
                 android:text="Current Name:"
                 android:layout_width="wrap_content"
@@ -86,23 +55,8 @@
                 android:maxLines="1"
                 android:singleLine="true"
                 android:textAppearance="@android:style/TextAppearance" />
->>>>>>> Stashed changes
 
             <EditText
-                android:id="@+id/password"
-                android:layout_width="match_parent"
-<<<<<<< Updated upstream
-                android:layout_height="wrap_content"
-                android:hint="@string/new_password"
-                android:imeActionId="@+id/login"
-                android:imeActionLabel="@string/action_sign_in_short"
-                android:imeOptions="actionUnspecified"
-                android:inputType="textPassword"
-                android:maxLines="1" />
-=======
-                android:layout_height="wrap_content">
-
-                <EditText
                     android:id="@+id/password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -114,21 +68,7 @@
                     android:maxLines="1"
                     android:singleLine="true"
                     android:textAppearance="@android:style/TextAppearance" />
->>>>>>> Stashed changes
-
-        </android.support.design.widget.TextInputLayout>
-
-<<<<<<< Updated upstream
         <Button
-            android:id="@+id/confirm_button"
-            style="?android:textAppearanceSmall"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="@string/confirm"
-            android:textStyle="bold" />
-=======
-            <Button
                 android:id="@+id/confirm_button"
                 style="@android:style/Widget.Material.Button.Colored"
                 android:layout_width="match_parent"
@@ -136,7 +76,5 @@
                 android:layout_marginTop="16dp"
                 android:text="Confirm"
                 android:textStyle="bold" />
->>>>>>> Stashed changes
-
     </LinearLayout>
 </LinearLayout>

@@ -3,7 +3,6 @@
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
-<<<<<<< Updated upstream
         <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="modules">
@@ -12,9 +11,6 @@
             <option value="$PROJECT_DIR$/app" />
           </set>
         </option>
-=======
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
->>>>>>> Stashed changes
         <option name="resolveModulePerSourceSet" value="false" />
       </GradleProjectSettings>
     </option>
