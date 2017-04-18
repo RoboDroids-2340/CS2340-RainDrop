@@ -18,6 +18,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="72dp"
         android:id="@+id/textView" />
+<<<<<<< Updated upstream
     <Button
         android:id="@+id/edit_button"
         style="?android:textAppearanceSmall"
@@ -26,6 +27,8 @@
         android:layout_marginTop="16dp"
         android:text="@string/edit_message"
         android:textStyle="bold" />
+=======
+>>>>>>> Stashed changes
 
     <Button
             android:text="@string/create_water_report"
@@ -36,7 +39,9 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"/>
+            android:layout_alignParentStart="true"
+        tools:targetApi="23"
+        style="@android:style/Widget.Material.Button.Colored" />
 
     <Button
             android:text="@string/create_quality_report"
@@ -46,10 +51,12 @@
             android:id="@+id/quality_report" android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"/>
+            android:layout_alignParentStart="true"
+        tools:targetApi="23"
+        style="@android:style/Widget.Material.Button.Colored" />
     <Button
             android:id="@+id/logout_button"
-            style="?android:textAppearanceSmall"
+            style="@android:style/Widget.Material.Light.Button.Borderless.Colored"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/logout_message"
@@ -57,38 +64,82 @@
             android:layout_below="@+id/view_map_button"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_marginTop="44dp"/>
+            android:layout_marginTop="44dp"
+        android:layout_alignParentBottom="true" />
+
     <Button
+<<<<<<< Updated upstream
             android:text="@string/view_water_reports"
+=======
+            android:text="View Map"
+>>>>>>> Stashed changes
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/buttonview"
-            android:layout_marginTop="11dp" android:layout_below="@+id/quality_report"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"/>
-    <Button
-            android:text="@string/view_maps"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/view_map_button"
+            android:id="@+id/viewmapbutton"
             android:layout_marginTop="55dp"
             android:layout_below="@+id/buttonview"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"/>
+            android:layout_alignParentStart="true"
+        tools:targetApi="23"
+        style="@android:style/Widget.Material.Button.Colored" />
+
+    <Button
+<<<<<<< Updated upstream
+            android:text="@string/view_maps"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/view_map_button"
+            android:layout_marginTop="55dp"
+=======
+            android:text="View Quality Reports"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+>>>>>>> Stashed changes
+            android:layout_below="@+id/buttonview"
+            android:id="@+id/quality_report_view" android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+        tools:targetApi="23"
+        style="@android:style/Widget.Material.Button.Colored" />
+
+    <Button
+            android:text="View Water Reports"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/buttonview"
+            android:layout_marginTop="13dp"
+        tools:targetApi="23"
+        style="@android:style/Widget.Material.Button.Colored"
+        android:layout_below="@+id/quality_report"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
     <Button
         android:text="@string/view_historical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+<<<<<<< Updated upstream
         android:layout_below="@+id/view_map_button"
         android:id="@+id/historical_report_view" android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
+=======
+        android:id="@+id/historical_report_view"
+        tools:targetApi="23"
+        style="@android:style/Widget.Material.Button.Colored"
+        android:layout_below="@+id/viewmapbutton"
+>>>>>>> Stashed changes
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"/>
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
     <Button
+<<<<<<< Updated upstream
             android:text="@string/view_quality_reports"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -97,4 +148,16 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"/>
+=======
+        android:id="@+id/edit_button"
+        style="@android:style/Widget.Material.Light.Button.Borderless.Colored"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="17dp"
+        android:text="Edit Profile"
+        android:textStyle="bold"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+>>>>>>> Stashed changes
 </RelativeLayout>

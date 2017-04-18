@@ -5,7 +5,7 @@ android {
     buildToolsVersion "25.0.2"
     defaultConfig {
         applicationId "edu.gatech.robodroids.raindrop"
-        minSdkVersion 15
+        minSdkVersion 25
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"

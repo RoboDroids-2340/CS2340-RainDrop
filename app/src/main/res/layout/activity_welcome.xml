@@ -44,7 +44,7 @@
 
             <Button
                 android:id="@+id/email_sign_in_button"
-                style="@style/Widget.AppCompat.Button.Small"
+                style="@android:style/Widget.Material.Button.Colored"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -56,7 +56,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/button"
-                style="@style/Widget.AppCompat.Button.Small" />
+                style="@android:style/Widget.Material.Button.Colored" />
 
         </LinearLayout>
     </ScrollView>
