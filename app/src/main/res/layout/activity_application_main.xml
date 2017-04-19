@@ -24,17 +24,6 @@
         style="@android:style/Widget.Material.Button.Colored" />
 
     <Button
-
-        android:id="@+id/edit_button"
-        style="@android:style/Widget.Material.Light.Button.Borderless.Colored"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Edit Profile"
-        android:textStyle="bold"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" />
-
-    <Button
             android:text="View Quality Reports"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -68,25 +57,6 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true" />
 
-    <TextView
-        android:text="@string/welcome_message"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView"
-        android:layout_below="@+id/edit_button"
-        android:layout_centerHorizontal="true" />
-
-    <Button
-            android:id="@+id/logout_button"
-            style="@android:style/Widget.Material.Light.Button.Borderless.Colored"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/logout_message"
-            android:textStyle="bold"
-        android:layout_marginBottom="17dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true" />
-
     <Button
         android:text="@string/view_historical"
         android:id="@+id/historical_report_view"
@@ -118,5 +88,39 @@
         android:layout_below="@+id/quality_report"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true" />
+
+    <Button
+            android:id="@+id/logout_button"
+            style="@android:style/Widget.Material.Light.Button.Borderless.Colored"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/logout_message"
+            android:textStyle="bold"
+        android:layout_alignParentBottom="true"
+        android:layout_alignEnd="@+id/textView"
+        android:layout_marginEnd="102dp"
+        android:layout_marginBottom="9dp" />
+
+    <Button
+
+        android:id="@+id/edit_button"
+        style="@android:style/Widget.Material.Light.Button.Borderless.Colored"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Edit Profile"
+        android:textStyle="bold"
+        android:layout_alignBaseline="@+id/logout_button"
+        android:layout_alignBottom="@+id/logout_button"
+        android:layout_alignStart="@+id/textView"
+        android:layout_marginStart="83dp" />
+
+    <TextView
+        android:text="@string/welcome_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView"
+        android:layout_marginTop="46dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
