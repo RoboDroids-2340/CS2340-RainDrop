@@ -73,12 +73,8 @@ public class CreateQualityReportActivity extends AppCompatActivity {
                     "You didn't fill out the report correctly!",
                     Toast.LENGTH_LONG).show();
         } else {
-            int reportNumber = report.getReportNumber();
-            DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-            mDatabase.child("quality_reports").child(reportNumber + "").setValue(report);
             Toast.makeText(getApplicationContext(),
-                    "Successfully created a report with report number: " + reportNumber,
-                    Toast.LENGTH_LONG).show();
+                    "Successfully created a report", Toast.LENGTH_LONG).show();
             Intent intent = new Intent(this, activity_application_main.class);
             intent.putExtra("user", user);
             intent.putExtra("userid", user.getUserid());

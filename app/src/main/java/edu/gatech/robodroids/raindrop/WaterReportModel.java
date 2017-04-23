@@ -1,5 +1,12 @@
 package edu.gatech.robodroids.raindrop;
 
+import android.util.Log;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -12,8 +19,7 @@ import java.util.Locale;
 class WaterReportModel {
 
     private String submissionTime;
-    private int reportNumber;
-    private static int numOfReports;
+    private long reportNumber;
     private double lat;
     private double lon;
     private String waterType;
@@ -35,8 +41,22 @@ class WaterReportModel {
         this.lon = lon;
         waterType = type;
         waterCondition = condition;
-        reportNumber = ++numOfReports;
         reporterName = name;
+        final DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+        mDatabase.child("num_water_reports")
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                long numReports = (long) snapshot.getValue();
+                reportNumber = numReports + 1;
+                mDatabase.child("num_water_reports").setValue(reportNumber);
+                addToDatabase();
+            }
+            @Override
+            public void onCancelled(DatabaseError error) {
+                Log.d("error", "error");
+            }
+        });
     }
 
     /**
@@ -44,6 +64,11 @@ class WaterReportModel {
      */
     public WaterReportModel() {
 
+    }
+
+    private void addToDatabase() {
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+        mDatabase.child("water_reports").child(reportNumber + "").setValue(this);
     }
     /**
      * Get submission time.
@@ -57,7 +82,7 @@ class WaterReportModel {
      * Get report number.
      * @return Report number.
      */
-    public int getReportNumber() {
+    public long getReportNumber() {
         return reportNumber;
     }
 
@@ -131,4 +156,5 @@ class WaterReportModel {
     public void setLat(double lat) {
         this.lat = lat;
     }
+
 }

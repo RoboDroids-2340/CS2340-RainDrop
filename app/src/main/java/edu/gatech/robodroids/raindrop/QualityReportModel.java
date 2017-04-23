@@ -1,5 +1,12 @@
 package edu.gatech.robodroids.raindrop;
 
+import android.util.Log;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -12,8 +19,7 @@ import java.util.Locale;
 class QualityReportModel {
 
     private String submissionTime;
-    private int reportNumber;
-    private static int numOfReports;
+    private long reportNumber;
     private double lat;
     private double lon;
     private double virusPPM;
@@ -39,8 +45,23 @@ class QualityReportModel {
         this.virusPPM = virusPPM;
         this.contaminantPPM = contaminantPPM;
         waterCondition = condition;
-        reportNumber = ++numOfReports;
         reporterName = name;
+        final DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+        mDatabase.child("num_quality_reports")
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot snapshot) {
+                        long numReports = (long) snapshot.getValue();
+                        reportNumber = numReports + 1;
+                        mDatabase.child("num_quality_reports").setValue(reportNumber);
+                        addToDatabase();
+                    }
+                    @Override
+                    public void onCancelled(DatabaseError error) {
+                        Log.d("error", "error");
+                    }
+                });
+
     }
 
     /**
@@ -48,6 +69,11 @@ class QualityReportModel {
      */
     public QualityReportModel() {
 
+    }
+
+    private void addToDatabase() {
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+        mDatabase.child("quality_reports").child(reportNumber + "").setValue(this);
     }
     /**
      * Get submission time.
@@ -61,7 +87,7 @@ class QualityReportModel {
      * Get report number.
      * @return Report number.
      */
-    public int getReportNumber() {
+    public long getReportNumber() {
         return reportNumber;
     }
 

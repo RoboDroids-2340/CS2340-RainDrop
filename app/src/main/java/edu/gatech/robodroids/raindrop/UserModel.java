@@ -78,7 +78,7 @@ public class UserModel implements Parcelable {
         type = in.readString();
     }
 
-    private static final Parcelable.Creator<UserModel> CREATOR =
+    public static final Parcelable.Creator<UserModel> CREATOR =
                                         new Parcelable.Creator<UserModel>(){
         @Override
         public UserModel createFromParcel(Parcel in) {

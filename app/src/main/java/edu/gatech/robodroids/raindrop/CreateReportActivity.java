@@ -109,12 +109,8 @@ public class CreateReportActivity extends AppCompatActivity implements
                     conditionSpinner.getSelectedItem().toString(),
                     user.getName(),
                     System.currentTimeMillis()+"");
-
-            DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-            mDatabase.child("water_reports").child(report.getReportNumber()+"").setValue(report);
             Toast.makeText(getApplicationContext(),
-                    "Successfully created a report with report number: " + report.getReportNumber(),
-                    Toast.LENGTH_LONG).show();
+                    "Successfully created a report", Toast.LENGTH_LONG).show();
             Intent intent = new Intent(this, activity_application_main.class);
             intent.putExtra("user", user);
             intent.putExtra("userid", user.getUserid());
