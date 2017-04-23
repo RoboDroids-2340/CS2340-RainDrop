@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/CS2340-RainDrop.iml" filepath="$PROJECT_DIR$/CS2340-RainDrop.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cs2340-raindrop.iml" filepath="$PROJECT_DIR$/cs2340-raindrop.iml" />
     </modules>
   </component>
 </project>

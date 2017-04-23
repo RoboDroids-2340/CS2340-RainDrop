@@ -1,7 +1,6 @@
 package edu.gatech.robodroids.raindrop;
 
 import android.content.Intent;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -10,12 +9,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.location.LocationServices;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+/**
+ * Created By: RoboDroids
+ */
 public class CreateQualityReportActivity extends AppCompatActivity {
 
     private UserModel user;
@@ -23,11 +23,11 @@ public class CreateQualityReportActivity extends AppCompatActivity {
     private EditText mLon;
     private EditText virusPPM;
     private EditText contaminantPPM;
-    private LocationRequest mLocationRequest;
     private Spinner conditionSpinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        LocationRequest mLocationRequest;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_quality_report);
         user = getIntent().getParcelableExtra("user");
@@ -35,7 +35,7 @@ public class CreateQualityReportActivity extends AppCompatActivity {
         conditionSpinner = (Spinner) findViewById(R.id.condition_spinner);
         String[] waterConditions = new String[]{"Safe", "Treatable", "Unsafe"};
         ArrayAdapter<String> conditionAdapter =
-                new ArrayAdapter(this,android.R.layout.simple_spinner_item, waterConditions);
+                new ArrayAdapter<>(this,android.R.layout.simple_spinner_item, waterConditions);
         conditionAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         conditionSpinner.setAdapter(conditionAdapter);
 
@@ -60,37 +60,27 @@ public class CreateQualityReportActivity extends AppCompatActivity {
      * Creates a new quality report.
      */
     private void submit() {
-        try {
-            if (conditionSpinner.getSelectedItem() == null) {
-                throw new Exception();
-            }
-            QualityReportModel report = new QualityReportModel(
-                    Double.parseDouble(mLat.getText().toString()),
-                    Double.parseDouble(mLon.getText().toString()),
-                    conditionSpinner.getSelectedItem().toString(),
-                    Double.parseDouble(virusPPM.getText().toString()),
-                    Double.parseDouble(contaminantPPM.getText().toString()),
-                    user.name,
-                    System.currentTimeMillis()+"");
-            //TODO the time is a dirty hack
-
-            DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-            mDatabase.child("quality_reports").child(report.getReportNumber()+"").setValue(report);
-            Toast.makeText(getApplicationContext(),
-                    "Successfully created a report with report number: " + report.getReportNumber(),
-                    Toast.LENGTH_LONG).show();
-            Intent intent = new Intent(this, activity_application_main.class);
-            intent.putExtra("user", user);
-            intent.putExtra("userid", user.userid);
-            startActivity(intent);
-        } catch(NumberFormatException e) {
+        QualityReportModel report = ValidateQualityInput.inputToQualityReport(
+                mLat.getText().toString(),
+                mLon.getText().toString(),
+                conditionSpinner.getSelectedItem(),
+                virusPPM.getText().toString(),
+                contaminantPPM.getText().toString(),
+                user.getName(),
+                System.currentTimeMillis()+"");
+        if (report == null) {
             Toast.makeText(getApplicationContext(),
                     "You didn't fill out the report correctly!",
                     Toast.LENGTH_LONG).show();
-        } catch(Exception e) {
+        } else {
             Toast.makeText(getApplicationContext(),
-                    "You need to finish filling out the report!",
-                    Toast.LENGTH_LONG).show();
+                    "Successfully created a report", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(this, activity_application_main.class);
+            intent.putExtra("user", user);
+            intent.putExtra("userid", user.getUserid());
+            startActivity(intent);
         }
     }
+
+
 }

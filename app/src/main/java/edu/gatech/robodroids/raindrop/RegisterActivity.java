@@ -22,6 +22,7 @@ public class RegisterActivity extends AppCompatActivity  {
         setContentView(R.layout.activity_register);
         final Button registerButton = (Button) findViewById(R.id.email_register_button);
         registerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 registerUser();
             }
@@ -36,13 +37,10 @@ public class RegisterActivity extends AppCompatActivity  {
         TextView password = (TextView) findViewById(R.id.password);
         TextView id = (TextView) findViewById(R.id.userid);
         Spinner userTypeSpinner = (Spinner) findViewById(R.id.user_type_spinner);
-        UserModel user = new UserModel(name.getText().toString(),
-                id.getText().toString().replaceAll("\\.", ","),
-                password.getText().toString(),
-                userTypeSpinner.getSelectedItem().toString());
+        UserModel user = UserBuilder.buildUser(name.getText().toString(), id.getText().toString(),
+                password.getText().toString(), userTypeSpinner.getSelectedItem().toString());
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-        //TODO allow for attempted duplicates
-        mDatabase.child("users").child(id.getText().toString().replaceAll("\\.", ",")).setValue(user);
+        mDatabase.child("users").child(user.getUserid()).setValue(user);
         Intent intent = new Intent(this, WelcomeActivity.class);
         startActivity(intent);
 

@@ -7,6 +7,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+/**
+ * Created By: Joshua Jacob
+ */
 public class activity_application_main extends AppCompatActivity {
 
     private UserModel user;
@@ -17,48 +20,56 @@ public class activity_application_main extends AppCompatActivity {
         setContentView(R.layout.activity_application_main);
         final Button logoutButton = (Button) findViewById(R.id.logout_button);
         logoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 logout();
             }
         });
         final Button edit_button = (Button) findViewById(R.id.edit_button);
         edit_button.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 edit();
             }
         });
         final Button report_button = (Button) findViewById(R.id.report_button);
         report_button.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 createReport();
             }
         });
         final Button view_report_button = (Button) findViewById(R.id.buttonview);
         view_report_button.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 viewReports();
             }
         });
-        final Button view_map_button = (Button) findViewById(R.id.viewmapbutton);
+        final Button view_map_button = (Button) findViewById(R.id.view_map_button);
         view_map_button.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 viewMap();
             }
         });
         final Button create_quality_report = (Button) findViewById(R.id.quality_report);
         create_quality_report.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 createQualityReport();
             }
         });
         final Button quality_report_view = (Button) findViewById(R.id.quality_report_view);
         quality_report_view.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 viewQualityReports();
             }
         });
         final Button historical_report_view = (Button) findViewById(R.id.historical_report_view);
         historical_report_view.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 viewHistoricalReports();
             }
@@ -80,7 +91,7 @@ public class activity_application_main extends AppCompatActivity {
      */
     private void edit() {
         Intent intent = new Intent(this, EditActivity.class);
-        intent.putExtra("userid", user.userid);
+        intent.putExtra("userId", user.getUserid());
         startActivity(intent);
     }
 
@@ -97,7 +108,6 @@ public class activity_application_main extends AppCompatActivity {
      * Opens the water report viewer activity.
      */
     private void viewReports() {
-        //TODO: put extra?
         Intent intent = new Intent(this, ViewWaterReports.class);
         startActivity(intent);
     }
@@ -114,7 +124,7 @@ public class activity_application_main extends AppCompatActivity {
      * Opens quality report creator activity, only if user has proper access level.
      */
     private void createQualityReport() {
-        if (user.type.equals("User")) {
+        if (checkAccessLevel(user, "User")) {
             Toast.makeText(getApplicationContext(),
                     "You do not have the proper access level for that!",
                     Toast.LENGTH_SHORT).show();
@@ -130,7 +140,7 @@ public class activity_application_main extends AppCompatActivity {
      */
     private void viewQualityReports() {
         Toast.makeText(getApplicationContext(), "1", Toast.LENGTH_LONG );
-        if (!user.type.equals("Manager")) {
+        if (!checkAccessLevel(user, "Manager")) {
             Toast.makeText(getApplicationContext(),
                     "You do not have the proper access level for that!",
                     Toast.LENGTH_SHORT).show();
@@ -138,14 +148,13 @@ public class activity_application_main extends AppCompatActivity {
             Intent intent = new Intent(this, ViewQualityReports.class);
             startActivity(intent);
         }
-        Toast.makeText(getApplicationContext(), "1", Toast.LENGTH_LONG );
     }
 
     /**
      * Opens historical report viewer activity.
      */
     private void viewHistoricalReports() {
-        if (!user.type.equals("Manager")) {
+        if (!checkAccessLevel(user, "Manager")) {
             Toast.makeText(getApplicationContext(),
                     "You do not have the proper access level for that!",
                     Toast.LENGTH_SHORT).show();
@@ -153,5 +162,20 @@ public class activity_application_main extends AppCompatActivity {
             Intent intent = new Intent(this, ViewHistoricalReports.class);
             startActivity(intent);
         }
+    }
+
+    /**
+     * Access level helper method
+     *
+     * @param user the user
+     * @param level the level to check
+     * @return boolean indicating user type equals level
+     */
+    public static boolean checkAccessLevel(UserModel user, String level) {
+        if ((user == null) || (level == null)) {
+            throw new IllegalArgumentException("Neither user or level arguments can be null");
+        }
+
+        return user.getType().equals(level);
     }
 }

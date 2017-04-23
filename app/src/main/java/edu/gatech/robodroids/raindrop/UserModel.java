@@ -4,14 +4,13 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 /**
- * Created by sc on 2/19/17.
+ * Created By: RoboDroids
  */
-
 public class UserModel implements Parcelable {
-    public String name;
-    public String userid;
-    public String pass;
-    public String type;
+    private String name;
+    private String userid;
+    private String pass;
+    private String type;
 
     /**
      * Default constructor required for calls to DataSnapshot.getValue(User.class).
@@ -47,6 +46,14 @@ public class UserModel implements Parcelable {
         this.type = "User";
     }
 
+    /**
+     * Creator needed to regenerate a user object.
+     * @return CREATOR
+     */
+    public static Creator<UserModel> getCREATOR() {
+        return CREATOR;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -54,10 +61,10 @@ public class UserModel implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel out, int flags) {
-        out.writeString(name);
-        out.writeString(userid);
-        out.writeString(pass);
-        out.writeString(type);
+        out.writeString(getName());
+        out.writeString(getUserid());
+        out.writeString(getPass());
+        out.writeString(getType());
     }
 
     /**
@@ -71,17 +78,78 @@ public class UserModel implements Parcelable {
         type = in.readString();
     }
 
-    /**
-     * Creator needed to regenerate a user object.
-     */
-    public static final Parcelable.Creator<UserModel> CREATOR = new Parcelable.Creator<UserModel>() {
+    public static final Parcelable.Creator<UserModel> CREATOR =
+                                        new Parcelable.Creator<UserModel>(){
+        @Override
         public UserModel createFromParcel(Parcel in) {
             return new UserModel(in);
         }
-
+        @Override
         public UserModel[] newArray(int size) {
             return new UserModel[size];
         }
     };
 
+    /**
+     *
+     * @return string name
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     *
+     * @param name name to set
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
+     *
+     * @return String userid
+     */
+    public String getUserid() {
+        return userid;
+    }
+
+    /**
+     *
+     * @param userid userid to set
+     */
+    public void setUserid(String userid) {
+        this.userid = userid;
+    }
+
+    /**
+     *
+     * @return string password
+     */
+    public String getPass() {
+        return pass;
+    }
+
+    /**
+     * @param pass to set
+     */
+    public void setPass(String pass) {
+        this.pass = pass;
+    }
+
+    /**
+     *
+     * @return String of the type
+     */
+    public String getType() {
+        return type;
+    }
+
+    /**
+     *
+     * @param type type to set
+     */
+    public void setType(String type) {
+        this.type = type;
+    }
 }

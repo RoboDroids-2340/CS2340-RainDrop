@@ -11,7 +11,7 @@
     tools:context="edu.gatech.robodroids.raindrop.activity_application_main">
 
     <TextView
-        android:text="Welcome to the app!"
+        android:text="@string/welcome_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -24,11 +24,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Edit Profile"
+        android:text="@string/edit_message"
         android:textStyle="bold" />
 
     <Button
-            android:text="Create Water Report"
+            android:text="@string/create_water_report"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/textView"
@@ -39,7 +39,7 @@
             android:layout_alignParentStart="true"/>
 
     <Button
-            android:text="Create Quality Report"
+            android:text="@string/create_quality_report"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/report_button"
@@ -52,14 +52,14 @@
             style="?android:textAppearanceSmall"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Logout"
+            android:text="@string/logout_message"
             android:textStyle="bold"
-            android:layout_below="@+id/viewmapbutton"
+            android:layout_below="@+id/view_map_button"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_marginTop="44dp"/>
     <Button
-            android:text="View Water Reports"
+            android:text="@string/view_water_reports"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/buttonview"
@@ -69,10 +69,10 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"/>
     <Button
-            android:text="View Map"
+            android:text="@string/view_maps"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/viewmapbutton"
+            android:id="@+id/view_map_button"
             android:layout_marginTop="55dp"
             android:layout_below="@+id/buttonview"
             android:layout_alignParentRight="true"
@@ -80,16 +80,16 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"/>
     <Button
-        android:text="View Historical Purity Report"
+        android:text="@string/view_historical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/viewmapbutton"
+        android:layout_below="@+id/view_map_button"
         android:id="@+id/historical_report_view" android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"/>
     <Button
-            android:text="View Quality Reports"
+            android:text="@string/view_quality_reports"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/buttonview"

@@ -4,11 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -20,18 +18,17 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by jjacob on 2/24/17.
+ * Created By: RoboDroids
  */
-
 public class EditActivity extends AppCompatActivity {
 
-    TextView emailText;
-    TextView passwordText;
-    TextView nameText;
-    final FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference ref = database.getReference("users");
-    String userid;
-    UserModel userStatic;
+    private TextView emailText;
+    private TextView passwordText;
+    private TextView nameText;
+    private final FirebaseDatabase database = FirebaseDatabase.getInstance();
+    private final DatabaseReference ref = database.getReference("users");
+    private String userid;
+    private UserModel userStatic;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +41,7 @@ public class EditActivity extends AppCompatActivity {
 
         final Button confirmButton = (Button) findViewById(R.id.confirm_button);
         confirmButton.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 confirm();
             }
@@ -55,9 +53,13 @@ public class EditActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 UserModel user = dataSnapshot.child("users").child(
                         userid).getValue(UserModel.class);
-                nameText.setText("Name: " + user.name);
-                emailText.setText( "Email: " + user.userid);
-                passwordText.setText("Password:  " + user.pass);
+                String nameString = "Name: " + user.getName();
+                String emailString = "Email: " + user.getUserid();
+                String passwordString = "Password: " + user.getPass();
+
+                nameText.setText(nameString);
+                emailText.setText(emailString);
+                passwordText.setText(passwordString);
                 mDatabase.removeEventListener(this);
                 userStatic = user;
             }
@@ -78,14 +80,14 @@ public class EditActivity extends AppCompatActivity {
         userid = getIntent().getStringExtra("userid");
         String newuserid = userid;
         final Map<String, Object> userUpdates = new HashMap<>();
-        if (!name.getText().toString().equals("")) {
+        if (!"".equals(name.getText().toString())) {
             userUpdates.put("name", name.getText().toString());
         }
         //if (!email.getText().toString().equals("")) {
           //  userUpdates.put("userid", email.getText().toString());
            // newuserid = email.getText().toString();
         //}
-        if (!password.getText().toString().equals("")) {
+        if (!"".equals(password.getText().toString())) {
             userUpdates.put("pass", password.getText().toString());
         }
         ref.child(userid).updateChildren(userUpdates);

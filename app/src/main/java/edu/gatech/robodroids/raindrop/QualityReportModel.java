@@ -1,19 +1,25 @@
 package edu.gatech.robodroids.raindrop;
 
+import android.util.Log;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Locale;
 
 /**
  * Quality Report Class
  * Created by jviszlai on 3/25/17.
  */
-public class QualityReportModel {
+class QualityReportModel {
 
     private String submissionTime;
-    private int reportNumber;
-    //TODO Change numOfReports to a database reference.
-    private static int numOfReports;
+    private long reportNumber;
     private double lat;
     private double lon;
     private double virusPPM;
@@ -31,15 +37,31 @@ public class QualityReportModel {
      * @param name name of who created report
      * @param subTime submission time
      */
-    public QualityReportModel(double lat, double lon, String condition, double virusPPM, double contaminantPPM, String name, String subTime) {
+    public QualityReportModel(double lat, double lon, String condition, double virusPPM,
+                                double contaminantPPM, String name, String subTime) {
         submissionTime = subTime;
         this.lat = lat;
         this.lon = lon;
         this.virusPPM = virusPPM;
         this.contaminantPPM = contaminantPPM;
         waterCondition = condition;
-        reportNumber = ++numOfReports;
         reporterName = name;
+        final DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+        mDatabase.child("num_quality_reports")
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot snapshot) {
+                        long numReports = (long) snapshot.getValue();
+                        reportNumber = numReports + 1;
+                        mDatabase.child("num_quality_reports").setValue(reportNumber);
+                        addToDatabase();
+                    }
+                    @Override
+                    public void onCancelled(DatabaseError error) {
+                        Log.d("error", "error");
+                    }
+                });
+
     }
 
     /**
@@ -47,6 +69,11 @@ public class QualityReportModel {
      */
     public QualityReportModel() {
 
+    }
+
+    private void addToDatabase() {
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+        mDatabase.child("quality_reports").child(reportNumber + "").setValue(this);
     }
     /**
      * Get submission time.
@@ -60,7 +87,7 @@ public class QualityReportModel {
      * Get report number.
      * @return Report number.
      */
-    public int getReportNumber() {
+    public long getReportNumber() {
         return reportNumber;
     }
 
@@ -101,14 +128,15 @@ public class QualityReportModel {
      * @return Quality Report info.
      */
     public String toString() {
-        DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss.SSS");
+        DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss.SSS", Locale.US);
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(Long.parseLong(submissionTime));
         String actualDate = formatter.format(calendar.getTime());
-        return String.format(
+        return String.format(Locale.ENGLISH,
                 "Created by: %s. Latitude: %f. Longitude: %f. Condition: %s. "
                 + "VirusPPM: %f. ContaminantPPM: %f. Date Received: %s. Report Number: %d",
-                reporterName, lat, lon, waterCondition, virusPPM, contaminantPPM, actualDate, reportNumber);
+                reporterName, lat, lon, waterCondition, virusPPM, contaminantPPM,
+                                                actualDate, reportNumber);
     }
 
     /**

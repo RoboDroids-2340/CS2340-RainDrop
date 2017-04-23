@@ -1,19 +1,25 @@
 package edu.gatech.robodroids.raindrop;
 
+import android.util.Log;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
+import java.util.Locale;
+
 /**
  * Water Report Class
  * Created by jviszlai on 3/2/17.
  */
-public class WaterReportModel {
+class WaterReportModel {
 
     private String submissionTime;
-    private int reportNumber;
-    //TODO Change numOfReports to a database reference.
-    private static int numOfReports;
+    private long reportNumber;
     private double lat;
     private double lon;
     private String waterType;
@@ -28,14 +34,29 @@ public class WaterReportModel {
      * @param condition condition of water source.
      * @param name name of who created report
      */
-    public WaterReportModel(double lat, double lon, String type, String condition, String name, String subTime) {
+    public WaterReportModel(double lat, double lon, String type, String condition
+                            ,String name, String subTime) {
         submissionTime = subTime;
         this.lat = lat;
         this.lon = lon;
         waterType = type;
         waterCondition = condition;
-        reportNumber = ++numOfReports;
         reporterName = name;
+        final DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+        mDatabase.child("num_water_reports")
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                long numReports = (long) snapshot.getValue();
+                reportNumber = numReports + 1;
+                mDatabase.child("num_water_reports").setValue(reportNumber);
+                addToDatabase();
+            }
+            @Override
+            public void onCancelled(DatabaseError error) {
+                Log.d("error", "error");
+            }
+        });
     }
 
     /**
@@ -43,6 +64,11 @@ public class WaterReportModel {
      */
     public WaterReportModel() {
 
+    }
+
+    private void addToDatabase() {
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+        mDatabase.child("water_reports").child(reportNumber + "").setValue(this);
     }
     /**
      * Get submission time.
@@ -56,7 +82,7 @@ public class WaterReportModel {
      * Get report number.
      * @return Report number.
      */
-    public int getReportNumber() {
+    public long getReportNumber() {
         return reportNumber;
     }
 
@@ -89,12 +115,13 @@ public class WaterReportModel {
      * @return Water Report info.
      */
     public String toString() {
-        DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss.SSS");
+        DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss.SSS", Locale.US);
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(Long.parseLong(submissionTime));
         String actualDate = formatter.format(calendar.getTime());
-        return String.format(
-                "Created by: %s. Latitude: %f. Longitude: %f. Type: %s. Condition: %s. Date Received: %s. Report Number: %d",
+        return String.format(Locale.ENGLISH,
+                "Created by: %s. Latitude: %f. Longitude: %f. Type: %s. " +
+                        "Condition: %s. Date Received: %s. Report Number: %d",
                 reporterName, lat, lon, waterType, waterCondition, actualDate, reportNumber);
     }
 
@@ -129,4 +156,5 @@ public class WaterReportModel {
     public void setLat(double lat) {
         this.lat = lat;
     }
+
 }
