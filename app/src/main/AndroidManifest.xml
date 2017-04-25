@@ -37,17 +37,24 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
         <activity
                 android:name=".LoginActivity"
                 android:label="@string/title_activity_login"/>
+
         <activity
                 android:name=".RegisterActivity"
                 android:label="@string/title_activity_register"/>
+
         <activity
                 android:name=".EditActivity"
                 android:label="Edit"/>
+
         <activity android:name=".activity_application_main"/>
-        <activity android:name=".CreateReportActivity"/>
+
+        <activity
+            android:name=".CreateReportActivity"
+            android:theme="@android:style/Theme.Material"/>
         <activity
                 android:name=".ViewWaterReports"
                 android:label="@string/title_activity_view_water_reports"
@@ -57,11 +64,14 @@
                 android:label="@string/title_activity_view_map"
                 android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".CreateQualityReportActivity">
+            android:theme="@android:style/Theme.Material"
         </activity>
         <activity android:name=".ViewQualityReports">
+            android:theme="@android:style/Theme.Material"
         </activity>
 
         <activity android:name=".ViewHistoricalReports">
+            android:theme="@android:style/Theme.Material"
         </activity>
     </application>
 
