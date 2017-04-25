@@ -91,7 +91,7 @@ public class activity_application_main extends AppCompatActivity {
      */
     private void edit() {
         Intent intent = new Intent(this, EditActivity.class);
-        intent.putExtra("userId", user.getUserid());
+        intent.putExtra("userid", user.getUserid());
         startActivity(intent);
     }
 
