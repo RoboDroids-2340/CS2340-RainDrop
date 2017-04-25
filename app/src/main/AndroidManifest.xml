@@ -30,39 +30,56 @@
 
         <activity
                 android:name=".WelcomeActivity"
-                android:label="@string/app_name">
+                android:label="@string/app_name"
+                android:theme="@style/Theme.AppCompat">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
         <activity
                 android:name=".LoginActivity"
-                android:label="@string/title_activity_login"/>
+                android:label="@string/title_activity_login"
+                android:theme="@style/Theme.AppCompat"/>
+
         <activity
                 android:name=".RegisterActivity"
-                android:label="@string/title_activity_register"/>
+                android:label="@string/title_activity_register"
+                android:theme="@style/Theme.AppCompat"/>
+
         <activity
                 android:name=".EditActivity"
-                android:label="Edit"/>
-        <activity android:name=".activity_application_main"/>
-        <activity android:name=".CreateReportActivity"/>
+                android:label="Edit"
+                android:theme="@style/Theme.AppCompat"/>
+
+        <activity
+            android:name=".activity_application_main"
+            android:theme="@style/Theme.AppCompat"/>
+
+        <activity
+            android:name=".CreateReportActivity"
+            android:theme="@style/Theme.AppCompat"/>
         <activity
                 android:name=".ViewWaterReports"
                 android:label="@string/title_activity_view_water_reports"
-                android:theme="@style/AppTheme.NoActionBar"/>
+                android:theme="@style/Theme.AppCompat"/>
         <activity
                 android:name=".ViewMap"
                 android:label="@string/title_activity_view_map"
-                android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name=".CreateQualityReportActivity">
-        </activity>
-        <activity android:name=".ViewQualityReports">
-        </activity>
+                android:theme="@style/Theme.AppCompat"/>
+        <activity
+            android:name=".CreateQualityReportActivity"
+            android:theme="@style/Theme.AppCompat"/>
+        <activity
+            android:name=".ViewQualityReports"
+            android:theme="@style/Theme.AppCompat"/>
 
-        <activity android:name=".ViewHistoricalReports">
-        </activity>
+        <activity
+            android:name=".ViewHistoricalReports"
+            android:theme="@style/Theme.AppCompat"/>
     </application>
 
 </manifest>
